@@ -1,0 +1,372 @@
+\documentclass{article}
+\usepackage[preprint]{neurips_2025}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{Sys One: Fast, Calibrated Tool-Call Routing in a Single Forward Pass}
+
+\author{
+  Sai Krishna Rallabandi \\
+  \texttt{srallaba.research@gmail.com}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+When an AI assistant must decide \emph{which tool to call}, the default
+approach is to prompt a large language model to choose. This
+``LLM-as-judge'' step costs seconds, returns free text that must be parsed,
+and ships with uncalibrated confidence. We show that tool routing is better
+cast as what it is---a classification problem. A 0.6B-parameter model with a
+sequence-classification head, fine-tuned with LoRA on open-source
+function-calling data, routes among 25 tool classes in a \emph{single forward
+pass}: 99.3\% accuracy and 0.989 macro-F1 on a held-out test set, $\sim$30\,ms
+per decision on a GTX 1080 Ti, emitting per-class probabilities and calibrated
+confidence as typed output. Our central finding concerns calibration:
+temperature fitted on validation ($T=1.79$) exposes genuine overconfidence
+and improves test NLL ($0.0310 \to 0.0261$) and Brier score
+($0.0131 \to 0.0120$)---while a companion experiment on easier data collapsed
+to $T=1.00$, hiding miscalibration entirely. Easy validation sets do not just
+flatter accuracy; they conceal overconfidence. We release code, curated
+datasets, and evaluation artifacts.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:intro}
+
+Modern AI assistants act through tools: calculators, search APIs, calendars,
+messengers, and domain backends \citep{qin2023toollearning, schick2023toolformer}.
+Before any tool executes, the system must solve a routing problem: given the
+user's utterance, \emph{which tool, if any, should handle it?} The dominant
+engineering pattern delegates this decision to a large language model
+prompted to select a tool \citep{yao2023react, zheng2023judge}. This works,
+but it is expensive in the exact dimension agents cannot afford: an extra
+LLM call adds 2--30 seconds of latency to every agentic step, returns
+free-form text that must be parsed into a structured call, and produces
+confidence estimates that are poorly calibrated
+\citep{kadavath2022mostly, guo2017calibration}.
+
+We argue the routing decision should not be generated at all. It should be
+\emph{classified}. A small encoder-style model with a linear head maps an
+utterance to a distribution over a fixed tool catalog in one forward pass,
+yielding typed output (tool, probabilities, confidence) with latency measured
+in milliseconds rather than seconds. Small specialized models have already
+proven surprisingly capable at agentic subtasks---Salesforce's 1B-parameter
+xLAM ``tiny giant'' beats much larger models on function calling
+\citep{zhang2024xlam}---but most work still frames tool selection as
+generation. We take the classification view seriously and ask: how far does a
+0.6B model go, and can its confidence be trusted?
+
+Our contributions:
+\begin{itemize}
+  \item A data-curation pipeline that turns the Glaive v2 function-calling
+  corpus \citep{glaive2024} into a clean 25-way routing benchmark: 949 raw
+  tool names normalized to 24 canonical tools plus a \texttt{no\_tool} class,
+  exact-duplicate removal (without which train/test leak identical strings),
+  and majority resolution of label conflicts (10,936 examples).
+  \item A LoRA \citep{hu2022lora} training recipe for Qwen3-0.6B
+  \citep{qwen2025report} that is stable on older (Pascal) GPUs: fp32 frozen
+  backbone and adapters with fp16 autocast compute, class-weighted loss for a
+  long-tailed label distribution.
+  \item A calibration finding with a practical moral. Temperature scaling
+  \citep{guo2017calibration} fit on validation gives $T=1.79$---genuine,
+  measurable overconfidence---and improves held-out NLL and Brier score. A
+  companion binary experiment on easy template data gave $T=1.00$, i.e.,
+  \emph{no detectable miscalibration}, which was wrong: the validation set was
+  simply too easy to expose it. Calibration measured on unrepresentative data
+  is not calibration.
+  \item Latency numbers on commodity hardware: mean 29.8\,ms per decision
+  including tokenization on a single GTX 1080 Ti ($\sim$100$\times$ faster
+  than LLM-as-judge), 175--190 decisions/sec batched.
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Tool use in language models.}
+ReAct \citep{yao2023react} interleaves reasoning and acting; Toolformer
+\citep{schick2023toolformer} teaches models to invoke APIs via self-supervised
+objectives; Gorilla \citep{patil2023gorilla} connects LLMs to massive API
+stores with retrieval. These frame tool selection as generation or
+retrieval. We instead treat routing over a \emph{fixed, canonical} catalog as
+classification, which is the right abstraction when the tool set is known in
+advance---the common production case.
+
+\paragraph{Small and specialized models for agents.}
+The xLAM family \citep{zhang2024xlam} demonstrates that compact models
+trained on high-quality synthetic agent data (APIGen \citep{liu2024apigen})
+can match or beat frontier models on function-calling benchmarks such as
+BFCL \citep{bfcl2024}. Our work shares the small-model thesis but differs in
+mechanism: one discriminative forward pass instead of autoregressive
+generation, which removes parsing entirely and makes latency predictable.
+
+\paragraph{Calibration.}
+Guo et al.\ \citep{guo2017calibration} showed modern neural networks are
+poorly calibrated and that temperature scaling is a simple, effective remedy;
+Naeini et al.\ \citep{naeini2015obtaining} formalized expected calibration
+error; the Brier score \citep{brier1950verification} remains a standard
+proper scoring rule. Desai and Durrett \citep{desai2020calibration} found
+pre-trained transformers miscalibrated out of the box, while Kadavath et
+al.\ \citep{kadavath2022mostly} showed language models often ``know what they
+know'' when asked properly. LLM-as-judge pipelines \citep{zheng2023judge}
+rarely calibrate at all. Our contribution here is empirical and cautionary:
+we exhibit a concrete case where temperature scaling reports perfect
+calibration ($T=1.00$) on easy validation data while the same procedure on
+representative data reveals substantial overconfidence ($T=1.79$).
+
+\paragraph{Parameter-efficient adaptation.}
+We build on LoRA \citep{hu2022lora} and the sequence-classification
+fine-tuning paradigm established by BERT \citep{devlin2019bert}, applied here
+to the Qwen3 family \citep{qwen2025report}.
+
+\section{Method}
+\label{sec:method}
+
+\subsection{Task formulation}
+\label{sec:task}
+
+Let $x$ be a user utterance and $\mathcal{Y} = \{1, \dots, 25\}$ a fixed set
+of routing classes (24 canonical tools plus \texttt{no\_tool}). A router is a
+classifier $p_\theta(y \mid x)$. The routing decision is
+$\hat{y} = \arg\max_y p_\theta(y \mid x)$ with confidence
+$c = \max_y p_\theta(y \mid x)$; downstream systems can threshold $c$ for
+selective abstention \citep{geifman2017selective}. The full distribution is
+emitted as typed output, so callers get uncertainty, not just a label.
+
+\subsection{Data curation}
+\label{sec:data}
+
+We build on \texttt{glaiveai/glaive-function-calling-v2} \citep{glaive2024}
+(Hugging Face, Apache-2.0, 112,960 rows), chosen over alternatives such as
+\texttt{Salesforce/xlam-function-calling-60k} because its v2 split contains
+natural no-call turns (the user asks for something the assistant cannot do
+$\to$ refusal), which become the \texttt{no\_tool} class.
+
+\paragraph{Extraction.} Each chat is split into turns. Every assistant turn
+containing a \texttt{<functioncall>} yields the pair (immediately preceding
+user utterance, tool name); rows with no function call yield (last user
+utterance, \texttt{no\_tool}). Multi-turn chats can yield several examples.
+
+\paragraph{Normalization.} The raw data contains 949 distinct tool names with
+a heavy synonym tail (\texttt{get\_news} / \texttt{get\_news\_headlines} /
+\texttt{search\_news}; \texttt{generate\_password} /
+\texttt{generate\_random\_password}; \texttt{create\_event} /
+\texttt{schedule\_meeting}; \dots). A synonym map merges these into the top
+24 canonical tools plus \texttt{no\_tool}: 25 classes. The full list is in
+Appendix~\ref{app:tools}.
+
+\paragraph{Deduplication.} Glaive v2 is heavily templated: e.g.,
+\texttt{calculate\_bmi} appears 3,103 times but only 171 utterances are
+unique. Exact (text, label) dedup is load-bearing---without it, train and
+test share identical strings and the benchmark is meaningless. 128 texts map
+to multiple tools (generic clarifications such as ``what do you mean?'');
+we keep the majority label.
+
+The final dataset has \textbf{10,936 examples}, stratified 70/15/15 into
+train (7,655), validation (1,640), and test (1,641). Per-class counts range
+from 37 to 700 tool examples; \texttt{no\_tool} has 2,000.
+
+\subsection{Model and training}
+\label{sec:model}
+
+We use Qwen3-0.6B \citep{qwen2025report} with a sequence-classification head:
+\begin{equation}
+  p_\theta(y \mid x) = \mathrm{softmax}\bigl(W h_\phi(x) + b\bigr),
+\end{equation}
+where $h_\phi(x)$ is the pooled final hidden state. We fine-tune with LoRA
+\citep{hu2022lora}, rank 16 on all attention and MLP projections, with the
+score head fully trained: $\sim$10.1M trainable parameters (1.67\%).
+
+\paragraph{Stability recipe.} On Pascal-era GPUs, full-fp16 training diverged.
+We keep the frozen backbone and the LoRA adapters in fp32 and use fp16 only
+via autocast for compute. This recipe trained without a single divergence.
+
+\paragraph{Optimization.} 3 epochs, batch size 16, learning rate $2\times
+10^{-4}$ with cosine decay and 100 warmup steps, early stopping on validation
+macro-F1. The label distribution is long-tailed
+(\texttt{generate\_random\_number}: 37 train examples vs.\ \texttt{no\_tool}:
+1,400), so we use a class-weighted cross-entropy,
+$\mathcal{L} = -\sum_i w_{y_i} \log p_\theta(y_i \mid x_i)$ with
+$w_c \propto 1/n_c$.
+
+\subsection{Calibration}
+\label{sec:calib-method}
+
+We apply temperature scaling \citep{guo2017calibration},
+$p_T(y \mid x) = \mathrm{softmax}(z / T)$, fitting the single scalar $T$ by
+minimizing NLL on the \emph{validation} split only---never on test. This is
+the correct protocol and, as Section~\ref{sec:calib-results} shows, the
+choice of validation data determines whether calibration means anything.
+
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Setup}
+\label{sec:setup}
+
+All experiments run on a single NVIDIA GTX 1080 Ti. Metrics: accuracy,
+macro-F1, NLL, Brier score \citep{brier1950verification}, and ECE with 15
+bins \citep{naeini2015obtaining}. Latency is measured including tokenization.
+
+\subsection{Main results}
+\label{sec:results}
+
+\begin{table}[t]
+  \centering
+  \caption{Test-set results ($n=1{,}641$, 25 classes). Temperature $T=1.7912$
+  is fit on the validation split only.}
+  \label{tab:main}
+  \begin{tabular}{lcc}
+    \toprule
+    Metric & Uncalibrated ($T{=}1.0$) & Scaled ($T{=}1.791$) \\
+    \midrule
+    Accuracy & 0.9927 & 0.9927 \\
+    Macro-F1 & 0.9894 & 0.9894 \\
+    NLL & 0.0310 & \textbf{0.0261} \\
+    Brier & 0.0131 & \textbf{0.0120} \\
+    ECE (15 bins) & 0.0067 & 0.0077 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:main} summarizes the headline: \textbf{99.3\% accuracy, 0.989
+macro-F1} on the held-out test set. Temperature scaling leaves accuracy and
+F1 unchanged (it is monotonic in the logits) while improving the proper
+scoring rules that measure uncertainty quality: NLL $0.0310 \to 0.0261$,
+Brier $0.0131 \to 0.0120$. ECE ticks \emph{up} slightly ($0.0067 \to
+0.0077$); with ECE already near zero this is noise, but it is an honest
+reminder that temperature scaling improves likelihood, not necessarily every
+calibration statistic.
+
+\subsection{Calibration: what easy validation hides}
+\label{sec:calib-results}
+
+The $T=1.79$ fit is the interesting number in this paper. It says the model,
+like most modern networks \citep{guo2017calibration}, is genuinely
+overconfident---and that a one-parameter fix, fit on representative data,
+measurably improves its probabilities.
+
+Contrast this with a companion binary experiment (prompt-injection detection
+on template-synthesized data) where the same procedure returned $T=1.00$:
+\emph{no detectable miscalibration}. That reading was wrong, not lucky. The
+validation set was so easy that the model's confidence was never stressed,
+so temperature scaling had nothing to find. Two lessons follow. First,
+calibration is a property of the (model, data-distribution) pair, not of the
+model alone; a $T$ fit on unrepresentative data certifies nothing.
+Second---and more practically---the same illusion applies to accuracy:
+benchmarks built from templated data flatter both correctness and confidence.
+Our dedup (Section~\ref{sec:data}) removes the leakage that makes this
+worse, but paraphrase-level template artifacts remain (Section~\ref{sec:limitations}).
+
+\subsection{Latency}
+\label{sec:latency}
+
+\begin{table}[t]
+  \centering
+  \caption{Inference latency, fp16 including tokenization, single GTX 1080 Ti.}
+  \label{tab:latency}
+  \begin{tabular}{lc}
+    \toprule
+    Setting & \\
+    \midrule
+    Single sample, mean & 29.8\,ms \\
+    Single sample, p50 / p99 & 29.3 / 47.9\,ms \\
+    Throughput, batch 16 & 175 samples/sec \\
+    Throughput, batch 64 & 190 samples/sec \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Per-decision latency is $\sim$30\,ms end to end (Table~\ref{tab:latency}),
+roughly two orders of magnitude faster than an LLM-as-judge tool-selection
+call (typically 2--30\,s), with typed output and no parsing step. Batching
+lifts throughput to $\sim$190 decisions/sec on decade-old hardware.
+
+\subsection{Error analysis}
+\label{sec:errors}
+
+The weakest classes are the small and near-duplicate ones:
+\texttt{calculate\_mortgage\_payment} (F1 $0.933$, $n{=}32$),
+\texttt{get\_movie\_details} (0.964), \texttt{translate\_text} (0.966),
+\texttt{calculate\_loan\_payment} (0.967), \texttt{get\_definition} (0.970).
+The top confusions are \emph{dataset-level tool duplicates}, not model
+failures: \texttt{calculate\_mortgage\_payment} $\to$
+\texttt{calculate\_loan\_payment} ($\times$4) and \texttt{search\_movies}
+$\to$ \texttt{get\_movie\_details} ($\times$2) are near-synonyms in the source
+data; a production router would merge them into one canonical tool. The
+genuinely interesting boundary cases are the three \texttt{no\_tool}
+confusions (one \texttt{translate\_text} $\to$ \texttt{no\_tool}, two in the
+reverse direction): deciding that \emph{no} tool applies is the hardest part
+of routing, and the part most worth calibrating.
+
+\section{Limitations}
+\label{sec:limitations}
+
+\begin{enumerate}
+  \item \textbf{Templated source data.} Glaive v2 utterances are synthetic and
+  templated. Dedup removed exact repeats, but paraphrase-level template
+  artifacts remain: the model partly learns ``which template family is this''
+  rather than deep intent. Real assistant traffic with human-verified labels
+  would be strictly better.
+  \item \textbf{Utterance-only input.} The router sees only the final user
+  utterance---no conversation history, no tool descriptions. Follow-ups like
+  ``what about France?'' are genuinely ambiguous without context.
+  \item \textbf{Thin tail classes.} \texttt{generate\_random\_number} (37
+  train), \texttt{translate\_text} (69), and \texttt{get\_definition} (74)
+  have few unique utterances; expect weak F1 there.
+  \item \textbf{One decision per forward pass.} The router makes a single
+  routing decision per pass; it does not score multiple parallel tool calls
+  jointly.
+  \item \textbf{No teacher labeling.} Labels come from the dataset's own
+  function-call annotations, taken at face value, with no human review.
+\end{enumerate}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Tool-call routing does not need generation. A 0.6B-parameter classifier,
+fine-tuned with LoRA on curated open-source data, routes among 25 tool
+classes at 99.3\% accuracy in $\sim$30\,ms per decision, emitting typed
+probabilities with calibrated confidence. Beyond the numbers, the durable
+lesson is about calibration methodology: temperature scaling fit on easy
+validation data reported perfect calibration ($T=1.00$) that was an artifact
+of the data, not a property of the model; the same procedure on
+representative data exposed real overconfidence ($T=1.79$) and fixed it.
+Calibrate against the distribution you will serve, or do not bother.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+
+\section{Canonical tool classes}
+\label{app:tools}
+
+The 25 routing classes (24 canonical tools + \texttt{no\_tool}):
+\texttt{analyze\_sentiment}, \texttt{calculate\_age},
+\texttt{calculate\_area}, \texttt{calculate\_bmi},
+\texttt{calculate\_discount}, \texttt{calculate\_distance},
+\texttt{calculate\_loan\_payment}, \texttt{calculate\_mortgage\_payment},
+\texttt{calculate\_tip}, \texttt{convert\_currency},
+\texttt{create\_calendar\_event}, \texttt{create\_todo},
+\texttt{generate\_password}, \texttt{generate\_qr\_code},
+\texttt{generate\_random\_number}, \texttt{get\_definition},
+\texttt{get\_movie\_details}, \texttt{get\_news}, \texttt{get\_stock\_price},
+\texttt{no\_tool}, \texttt{search\_books}, \texttt{search\_movies},
+\texttt{search\_recipes}, \texttt{send\_email}, \texttt{translate\_text}.
+The exact label map is \texttt{label\_map.json} in the repository.
+
+\section{Reproducibility}
+\label{app:repro}
+
+Code, datasets (\texttt{data\_train.jsonl} / \texttt{data\_val.jsonl} /
+\texttt{data\_test.jsonl}), label map, fitted temperature, and the evaluation
+report are in the public repository. \texttt{requirements.txt} pins the
+exact dependency versions. Reference run: \texttt{python make\_data.py}
+$\to$ \texttt{python train.py} ($\sim$20\,min on a GTX 1080 Ti) $\to$
+\texttt{python eval.py}. Trained weights ($\sim$2.7\,GB) are not committed;
+\texttt{train.py} reproduces them.
+
+\end{document}

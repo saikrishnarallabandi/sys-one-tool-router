@@ -4,3 +4,9 @@ __pycache__/
 *.pyc
 *.log
 .env
+*.aux
+*.bbl
+*.blg
+*.out
+*.log
+*.toc
