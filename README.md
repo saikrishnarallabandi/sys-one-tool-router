@@ -18,7 +18,7 @@ Input is a user utterance; output is typed JSON:
  "confidence": 0.93, "latency_ms": 28.4}
 ```
 
-This is the second in an informal "System One" series of experiments: small,
+This is the second in an informal "Sys One" series of experiments: small,
 fast, calibrated models that make one structured decision per forward pass
 (the first was a binary prompt-injection detector). Each repo stands alone —
 you don't need the first to use this one.
