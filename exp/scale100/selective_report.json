@@ -1,0 +1,140 @@
+{
+  "n": 2557,
+  "temperature": 1.4063419103622437,
+  "overall_acc": 0.9605005866249511,
+  "risk_coverage": [
+    {
+      "coverage": 1.0,
+      "threshold": 0.0911,
+      "selective_acc": 0.9605,
+      "n_selected": 2557,
+      "n_errors": 101
+    },
+    {
+      "coverage": 0.99,
+      "threshold": 0.4705,
+      "selective_acc": 0.9676,
+      "n_selected": 2531,
+      "n_errors": 82
+    },
+    {
+      "coverage": 0.98,
+      "threshold": 0.5547,
+      "selective_acc": 0.9705,
+      "n_selected": 2505,
+      "n_errors": 74
+    },
+    {
+      "coverage": 0.95,
+      "threshold": 0.7327,
+      "selective_acc": 0.979,
+      "n_selected": 2429,
+      "n_errors": 51
+    },
+    {
+      "coverage": 0.9,
+      "threshold": 0.8762,
+      "selective_acc": 0.9874,
+      "n_selected": 2301,
+      "n_errors": 29
+    },
+    {
+      "coverage": 0.85,
+      "threshold": 0.9509,
+      "selective_acc": 0.9917,
+      "n_selected": 2173,
+      "n_errors": 18
+    },
+    {
+      "coverage": 0.8,
+      "threshold": 0.9803,
+      "selective_acc": 0.9956,
+      "n_selected": 2045,
+      "n_errors": 9
+    }
+  ],
+  "threshold_sweep": [
+    {
+      "threshold": 0.5,
+      "coverage": 0.9863,
+      "selective_acc": 0.9683,
+      "n_selected": 2522
+    },
+    {
+      "threshold": 0.7,
+      "coverage": 0.9562,
+      "selective_acc": 0.9783,
+      "n_selected": 2445
+    },
+    {
+      "threshold": 0.8,
+      "coverage": 0.932,
+      "selective_acc": 0.982,
+      "n_selected": 2383
+    },
+    {
+      "threshold": 0.9,
+      "coverage": 0.8874,
+      "selective_acc": 0.9903,
+      "n_selected": 2269
+    },
+    {
+      "threshold": 0.95,
+      "coverage": 0.8506,
+      "selective_acc": 0.9913,
+      "n_selected": 2175
+    },
+    {
+      "threshold": 0.98,
+      "coverage": 0.8017,
+      "selective_acc": 0.9956,
+      "n_selected": 2050
+    },
+    {
+      "threshold": 0.99,
+      "coverage": 0.7579,
+      "selective_acc": 0.9979,
+      "n_selected": 1938
+    }
+  ],
+  "no_tool": {
+    "prevalence": 0.11732499022291748,
+    "pred_rate": 0.11654282362143137,
+    "precision": 1.0,
+    "recall": 0.9933333333333333
+  },
+  "errors_catchable": {
+    "n_errors": 101,
+    "err_conf_mean": 0.6972364783287048,
+    "ok_conf_mean": 0.9722579121589661,
+    "frac_errors_below_0_9": 0.7821782178217822,
+    "frac_correct_below_0_9": 0.08509771986970684
+  },
+  "conf_histogram": {
+    "counts": [
+      1,
+      2,
+      5,
+      6,
+      21,
+      40,
+      37,
+      62,
+      114,
+      2269
+    ],
+    "edges": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ]
+  }
+}

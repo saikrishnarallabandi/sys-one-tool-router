@@ -1,0 +1,854 @@
+{
+  "temperature": 1.4063419103622437,
+  "n_test": 2557,
+  "test_before": {
+    "accuracy": 0.9605005866249511,
+    "macro_f1": 0.8800344350433635,
+    "nll": 0.1523093731599456,
+    "brier": 0.06457845121622086,
+    "ece15": 0.02029484536645932
+  },
+  "test_after": {
+    "accuracy": 0.9605005866249511,
+    "macro_f1": 0.8800344350433635,
+    "nll": 0.13950392930460673,
+    "brier": 0.062838613986969,
+    "ece15": 0.012153540918218155
+  },
+  "per_class": [
+    {
+      "tool": "calculate_rectangle_area",
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 1
+    },
+    {
+      "tool": "create_account",
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 4
+    },
+    {
+      "tool": "find_restaurants",
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 5
+    },
+    {
+      "tool": "calculate_loan_interest",
+      "precision": 1.0,
+      "recall": 0.2,
+      "f1": 0.3333,
+      "support": 5
+    },
+    {
+      "tool": "find_movie",
+      "precision": 0.3333,
+      "recall": 0.3333,
+      "f1": 0.3333,
+      "support": 3
+    },
+    {
+      "tool": "get_song_lyrics",
+      "precision": 0.3333,
+      "recall": 0.3333,
+      "f1": 0.3333,
+      "support": 3
+    },
+    {
+      "tool": "count_words",
+      "precision": 0.5,
+      "recall": 0.3333,
+      "f1": 0.4,
+      "support": 3
+    },
+    {
+      "tool": "search_restaurant",
+      "precision": 0.6667,
+      "recall": 0.3333,
+      "f1": 0.4444,
+      "support": 6
+    },
+    {
+      "tool": "get_lyrics",
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5,
+      "support": 4
+    },
+    {
+      "tool": "calculate_route_distance",
+      "precision": 0.5,
+      "recall": 0.6667,
+      "f1": 0.5714,
+      "support": 3
+    },
+    {
+      "tool": "get_random_number",
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6667,
+      "support": 2
+    },
+    {
+      "tool": "get_recipe",
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.6667,
+      "support": 10
+    },
+    {
+      "tool": "get_news_articles",
+      "precision": 0.8,
+      "recall": 0.6154,
+      "f1": 0.6957,
+      "support": 13
+    },
+    {
+      "tool": "find_nearby_restaurants",
+      "precision": 0.75,
+      "recall": 0.6667,
+      "f1": 0.7059,
+      "support": 9
+    },
+    {
+      "tool": "search_song",
+      "precision": 0.8,
+      "recall": 0.7273,
+      "f1": 0.7619,
+      "support": 11
+    },
+    {
+      "tool": "check_word_count",
+      "precision": 0.7143,
+      "recall": 0.8333,
+      "f1": 0.7692,
+      "support": 6
+    },
+    {
+      "tool": "calculate_fibonacci",
+      "precision": 0.8,
+      "recall": 0.8,
+      "f1": 0.8,
+      "support": 5
+    },
+    {
+      "tool": "calculate_gcd",
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8,
+      "support": 3
+    },
+    {
+      "tool": "search_restaurants",
+      "precision": 0.7209,
+      "recall": 0.9118,
+      "f1": 0.8052,
+      "support": 34
+    },
+    {
+      "tool": "search_music",
+      "precision": 0.8,
+      "recall": 0.8421,
+      "f1": 0.8205,
+      "support": 19
+    },
+    {
+      "tool": "calculate_loan_repayment",
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571,
+      "support": 4
+    },
+    {
+      "tool": "generate_qr_code",
+      "precision": 0.9,
+      "recall": 0.8182,
+      "f1": 0.8571,
+      "support": 22
+    },
+    {
+      "tool": "generate_username",
+      "precision": 0.8,
+      "recall": 0.9231,
+      "f1": 0.8571,
+      "support": 13
+    },
+    {
+      "tool": "generate_random_number",
+      "precision": 0.7778,
+      "recall": 1.0,
+      "f1": 0.875,
+      "support": 7
+    },
+    {
+      "tool": "create_task",
+      "precision": 0.9375,
+      "recall": 0.8333,
+      "f1": 0.8824,
+      "support": 18
+    },
+    {
+      "tool": "add_numbers",
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8889,
+      "support": 4
+    },
+    {
+      "tool": "get_movie_recommendations",
+      "precision": 0.8571,
+      "recall": 0.9231,
+      "f1": 0.8889,
+      "support": 13
+    },
+    {
+      "tool": "calculate_mortgage_payment",
+      "precision": 0.9062,
+      "recall": 0.8788,
+      "f1": 0.8923,
+      "support": 33
+    },
+    {
+      "tool": "find_shortest_path",
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "support": 5
+    },
+    {
+      "tool": "get_translation",
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "support": 5
+    },
+    {
+      "tool": "calculate_fibonacci_sequence",
+      "precision": 0.9167,
+      "recall": 0.9167,
+      "f1": 0.9167,
+      "support": 12
+    },
+    {
+      "tool": "calculate_loan_payment",
+      "precision": 0.8871,
+      "recall": 0.9483,
+      "f1": 0.9167,
+      "support": 58
+    },
+    {
+      "tool": "check_flight_status",
+      "precision": 0.8571,
+      "recall": 1.0,
+      "f1": 0.9231,
+      "support": 6
+    },
+    {
+      "tool": "create_user",
+      "precision": 0.8621,
+      "recall": 1.0,
+      "f1": 0.9259,
+      "support": 25
+    },
+    {
+      "tool": "translate_text",
+      "precision": 1.0,
+      "recall": 0.8667,
+      "f1": 0.9286,
+      "support": 15
+    },
+    {
+      "tool": "calculate_sales_tax",
+      "precision": 0.875,
+      "recall": 1.0,
+      "f1": 0.9333,
+      "support": 7
+    },
+    {
+      "tool": "calculate_age_difference",
+      "precision": 1.0,
+      "recall": 0.8889,
+      "f1": 0.9412,
+      "support": 9
+    },
+    {
+      "tool": "create_todo_list",
+      "precision": 0.8889,
+      "recall": 1.0,
+      "f1": 0.9412,
+      "support": 8
+    },
+    {
+      "tool": "generate_barcode",
+      "precision": 0.9412,
+      "recall": 0.9412,
+      "f1": 0.9412,
+      "support": 34
+    },
+    {
+      "tool": "calculate_route",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10
+    },
+    {
+      "tool": "find_nearby_places",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10
+    },
+    {
+      "tool": "find_nearest_gas_station",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10
+    },
+    {
+      "tool": "generate_random_color",
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "support": 10
+    },
+    {
+      "tool": "search_movies",
+      "precision": 0.9434,
+      "recall": 0.9524,
+      "f1": 0.9479,
+      "support": 105
+    },
+    {
+      "tool": "calculate_distance",
+      "precision": 0.9677,
+      "recall": 0.9375,
+      "f1": 0.9524,
+      "support": 32
+    },
+    {
+      "tool": "track_calories",
+      "precision": 0.9167,
+      "recall": 1.0,
+      "f1": 0.9565,
+      "support": 11
+    },
+    {
+      "tool": "get_news",
+      "precision": 0.9537,
+      "recall": 0.981,
+      "f1": 0.9671,
+      "support": 105
+    },
+    {
+      "tool": "calculate_interest",
+      "precision": 0.9375,
+      "recall": 1.0,
+      "f1": 0.9677,
+      "support": 30
+    },
+    {
+      "tool": "create_todo",
+      "precision": 0.9559,
+      "recall": 0.9848,
+      "f1": 0.9701,
+      "support": 66
+    },
+    {
+      "tool": "generate_password",
+      "precision": 0.98,
+      "recall": 0.9608,
+      "f1": 0.9703,
+      "support": 51
+    },
+    {
+      "tool": "search_recipes",
+      "precision": 0.9528,
+      "recall": 0.9902,
+      "f1": 0.9712,
+      "support": 102
+    },
+    {
+      "tool": "calculate_age",
+      "precision": 0.9444,
+      "recall": 1.0,
+      "f1": 0.9714,
+      "support": 17
+    },
+    {
+      "tool": "search_images",
+      "precision": 1.0,
+      "recall": 0.9524,
+      "f1": 0.9756,
+      "support": 21
+    },
+    {
+      "tool": "get_random_quote",
+      "precision": 0.9545,
+      "recall": 1.0,
+      "f1": 0.9767,
+      "support": 21
+    },
+    {
+      "tool": "play_music",
+      "precision": 0.9792,
+      "recall": 0.9792,
+      "f1": 0.9792,
+      "support": 48
+    },
+    {
+      "tool": "calculate_shipping_cost",
+      "precision": 0.96,
+      "recall": 1.0,
+      "f1": 0.9796,
+      "support": 24
+    },
+    {
+      "tool": "calculate_bmi",
+      "precision": 1.0,
+      "recall": 0.9615,
+      "f1": 0.9804,
+      "support": 26
+    },
+    {
+      "tool": "get_movie_details",
+      "precision": 0.9643,
+      "recall": 1.0,
+      "f1": 0.9818,
+      "support": 27
+    },
+    {
+      "tool": "calculate_tax",
+      "precision": 1.0,
+      "recall": 0.9697,
+      "f1": 0.9846,
+      "support": 33
+    },
+    {
+      "tool": "analyze_sentiment",
+      "precision": 0.9767,
+      "recall": 1.0,
+      "f1": 0.9882,
+      "support": 42
+    },
+    {
+      "tool": "search_books",
+      "precision": 1.0,
+      "recall": 0.981,
+      "f1": 0.9904,
+      "support": 105
+    },
+    {
+      "tool": "calculate_area",
+      "precision": 0.9875,
+      "recall": 1.0,
+      "f1": 0.9937,
+      "support": 79
+    },
+    {
+      "tool": "no_tool",
+      "precision": 1.0,
+      "recall": 0.9933,
+      "f1": 0.9967,
+      "support": 300
+    },
+    {
+      "tool": "analyze_image",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 9
+    },
+    {
+      "tool": "calculate_average",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 3
+    },
+    {
+      "tool": "calculate_discount",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 105
+    },
+    {
+      "tool": "calculate_factorial",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 2
+    },
+    {
+      "tool": "calculate_gpa",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 35
+    },
+    {
+      "tool": "calculate_gross_salary",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 7
+    },
+    {
+      "tool": "calculate_percentage",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 4
+    },
+    {
+      "tool": "calculate_profit",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 17
+    },
+    {
+      "tool": "calculate_square_root",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 3
+    },
+    {
+      "tool": "calculate_tip",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 56
+    },
+    {
+      "tool": "check_email_availability",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 11
+    },
+    {
+      "tool": "check_palindrome",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 11
+    },
+    {
+      "tool": "check_prime_number",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 2
+    },
+    {
+      "tool": "check_spelling",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 6
+    },
+    {
+      "tool": "convert_currency",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 43
+    },
+    {
+      "tool": "convert_temperature",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 14
+    },
+    {
+      "tool": "create_calendar_event",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 105
+    },
+    {
+      "tool": "create_contact",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 6
+    },
+    {
+      "tool": "create_note",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 13
+    },
+    {
+      "tool": "create_playlist",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 8
+    },
+    {
+      "tool": "create_reminder",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 6
+    },
+    {
+      "tool": "create_user_profile",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 3
+    },
+    {
+      "tool": "encrypt_text",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 8
+    },
+    {
+      "tool": "execute_program",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 18
+    },
+    {
+      "tool": "generate_invoice",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 90
+    },
+    {
+      "tool": "generate_random_name",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 5
+    },
+    {
+      "tool": "generate_uuid",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 2
+    },
+    {
+      "tool": "get_current_time",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 3
+    },
+    {
+      "tool": "get_definition",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 16
+    },
+    {
+      "tool": "get_random_fact",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 16
+    },
+    {
+      "tool": "get_random_joke",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 6
+    },
+    {
+      "tool": "get_stock_price",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 33
+    },
+    {
+      "tool": "search_hotels",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 10
+    },
+    {
+      "tool": "search_jobs",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 29
+    },
+    {
+      "tool": "search_product",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 19
+    },
+    {
+      "tool": "send_email",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 92
+    },
+    {
+      "tool": "track_expenses",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 7
+    },
+    {
+      "tool": "track_package",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 2
+    }
+  ],
+  "confusions": [
+    {
+      "true": "get_recipe",
+      "pred": "search_recipes",
+      "count": 5
+    },
+    {
+      "true": "get_news_articles",
+      "pred": "get_news",
+      "count": 5
+    },
+    {
+      "true": "search_restaurant",
+      "pred": "search_restaurants",
+      "count": 4
+    },
+    {
+      "true": "find_restaurants",
+      "pred": "search_restaurants",
+      "count": 4
+    },
+    {
+      "true": "create_account",
+      "pred": "create_user",
+      "count": 4
+    },
+    {
+      "true": "search_song",
+      "pred": "search_music",
+      "count": 3
+    },
+    {
+      "true": "find_nearby_restaurants",
+      "pred": "search_restaurants",
+      "count": 3
+    },
+    {
+      "true": "create_task",
+      "pred": "create_todo",
+      "count": 3
+    },
+    {
+      "true": "calculate_mortgage_payment",
+      "pred": "calculate_loan_payment",
+      "count": 3
+    },
+    {
+      "true": "calculate_loan_payment",
+      "pred": "calculate_mortgage_payment",
+      "count": 3
+    },
+    {
+      "true": "calculate_loan_interest",
+      "pred": "calculate_loan_payment",
+      "count": 3
+    },
+    {
+      "true": "search_restaurants",
+      "pred": "find_restaurants",
+      "count": 2
+    },
+    {
+      "true": "search_music",
+      "pred": "search_song",
+      "count": 2
+    },
+    {
+      "true": "search_movies",
+      "pred": "get_movie_recommendations",
+      "count": 2
+    },
+    {
+      "true": "search_movies",
+      "pred": "find_movie",
+      "count": 2
+    },
+    {
+      "true": "get_song_lyrics",
+      "pred": "get_lyrics",
+      "count": 2
+    },
+    {
+      "true": "get_news",
+      "pred": "get_news_articles",
+      "count": 2
+    },
+    {
+      "true": "get_lyrics",
+      "pred": "get_song_lyrics",
+      "count": 2
+    },
+    {
+      "true": "generate_qr_code",
+      "pred": "generate_barcode",
+      "count": 2
+    },
+    {
+      "true": "generate_password",
+      "pred": "generate_username",
+      "count": 2
+    },
+    {
+      "true": "generate_barcode",
+      "pred": "generate_qr_code",
+      "count": 2
+    },
+    {
+      "true": "find_movie",
+      "pred": "search_movies",
+      "count": 2
+    },
+    {
+      "true": "count_words",
+      "pred": "check_word_count",
+      "count": 2
+    },
+    {
+      "true": "calculate_distance",
+      "pred": "calculate_route_distance",
+      "count": 2
+    },
+    {
+      "true": "translate_text",
+      "pred": "get_translation",
+      "count": 1
+    }
+  ]
+}
