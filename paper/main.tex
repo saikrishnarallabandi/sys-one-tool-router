@@ -191,7 +191,8 @@ from 37 to 700 tool examples; \texttt{no\_tool} has 2,000.
 \subsection{Model and training}
 \label{sec:model}
 
-We use Qwen3-0.6B \citep{qwen2025report} with a sequence-classification head:
+We use Qwen3-0.6B \citep{qwen2025report} in non-thinking mode (no
+chain-of-thought) with a sequence-classification head:
 \begin{equation}
   p_\theta(y \mid x) = \mathrm{softmax}\bigl(W h_\phi(x) + b\bigr),
 \end{equation}
@@ -226,7 +227,9 @@ choice of validation data determines whether calibration means anything.
 \subsection{Setup}
 \label{sec:setup}
 
-All experiments run on a single NVIDIA GTX 1080 Ti. Metrics: accuracy,
+All experiments run on a single NVIDIA GTX 1080 Ti. The base model is Qwen3-0.6B
+in non-thinking mode, frozen, for every experiment---both the classifier and
+the generative baseline. Metrics: accuracy,
 macro-F1, NLL, Brier score \citep{brier1950verification}, and ECE with 15
 bins \citep{naeini2015obtaining}. Latency is measured including tokenization.
 
@@ -236,15 +239,17 @@ bins \citep{naeini2015obtaining}. Latency is measured including tokenization.
 \begin{table}[t]
   \centering
   \small
-  \caption{Leaderboard: routing quality and latency by dataset and task. The
-generative column is the stronger 3-shot baseline (same Qwen3-0.6B, plain-text
-prompts, greedy decoding, $\le$16 tokens, no confidence output); parse failures
-count as wrong (28.1\% zero-shot, 15.2\% 3-shot on the curated set). Latency is
-mean per-example on one GTX 1080 Ti, fp16, including tokenization. Macro-F1 is
-over the classes present in each split, with parse failures as errors. The BFCL
-row is a frozen zero-shot transfer probe---its generative baseline is not yet
-measured, and it ran on CPU (GPU unhealthy), so no latency is reported.
-Temperature $T=1.7912$ is fit on the validation split only.}
+  \caption{Leaderboard: routing quality and latency by dataset and task. Every
+row is a setting with a train/test split on which a model was fine-tuned; the
+generative column is the stronger 3-shot baseline using the same frozen
+Qwen3-0.6B in non-thinking mode (plain-text prompts, greedy decoding,
+$\le$16 tokens, no confidence output). Parse failures count as wrong (28.1\%
+zero-shot, 15.2\% 3-shot on the curated set). Latency is mean per-example on one
+GTX 1080 Ti, fp16, including tokenization. Macro-F1 is over the classes present
+in each split, with parse failures as errors. Datasets without an official
+train/test split are excluded from the leaderboard by design---BFCL is flagged
+for future LoRA/transfer-learning work. Temperature $T=1.7912$ is fit on the
+validation split only.}
   \label{tab:main}
   \begin{tabular}{lcc@{\hspace{1.2em}}cc@{\hspace{1.2em}}cc}
     \toprule
@@ -253,7 +258,6 @@ Temperature $T=1.7912$ is fit on the validation split only.}
     Dataset + task & Gen. & Sys One & Gen. & Sys One & Gen. & Sys One \\
     \midrule
     Curated, tool routing ($n{=}1{,}641$) & 0.512 & \textbf{0.993} & 0.523 & \textbf{0.989} & 500.6 & \textbf{29.8} \\
-    BFCL mapped, frozen transfer ($n{=}69$) & --- & \textbf{0.913} & --- & \textbf{0.889} & --- & --- \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -273,13 +277,13 @@ Brier $0.0131 \to 0.0120$. ECE ticks \emph{up} slightly ($0.0067 \to
 reminder that temperature scaling improves likelihood, not necessarily every
 calibration statistic.
 
-The second row is a different kind of test: a frozen zero-shot transfer probe.
-We conservatively mapped 68 BFCL \citep{bfcl2024} functions onto our 25 classes
-(69 single-function examples) and evaluated the frozen router with no
-retraining. Accuracy is 91.3\% (macro-F1 0.889), and the abstention machinery
-transfers with it: 98.4\% selective accuracy at 88.4\% coverage under the 0.9
-confidence threshold. The generative column is empty because that baseline has
-not yet been measured on BFCL.
+Datasets without an official train/test split are excluded from the leaderboard
+by design. BFCL \citep{bfcl2024} ships no train/test split, so a frozen
+transfer probe over 68 manually mapped functions (69 single-function examples)
+cannot be a leaderboard entry---there is no split to fine-tune against. We flag
+BFCL, and any similar split-less dataset, for future LoRA/transfer-learning
+work, where the protocol would be to construct a split and fine-tune rather
+than probe frozen transfer.
 
 \subsection{Calibration: what easy validation hides}
 \label{sec:calib-results}
