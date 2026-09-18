@@ -235,24 +235,33 @@ bins \citep{naeini2015obtaining}. Latency is measured including tokenization.
 
 \begin{table}[t]
   \centering
-  \caption{Test-set results ($n=1{,}641$, 25 classes). Temperature $T=1.7912$
-  is fit on the validation split only.}
+  \caption{Quality vs.\ latency on the test set ($n=1{,}641$, 25 classes).
+  Generative baselines use the same base model (Qwen3-0.6B), plain-text prompts,
+  greedy decoding ($\le$16 tokens), and no confidence output; parse failures
+  count as wrong. Latency is mean per-example on one GTX 1080 Ti, fp16,
+  including tokenization. Macro-F1 is over the 25 real classes with parse
+  failures as errors (no invented 26th class). Temperature $T=1.7912$ is fit
+  on the validation split only.}
   \label{tab:main}
-  \begin{tabular}{lcc}
+  \begin{tabular}{lcccc}
     \toprule
-    Metric & Uncalibrated ($T{=}1.0$) & Scaled ($T{=}1.791$) \\
+    Method & Accuracy & Macro-F1 & Unparseable & Mean latency \\
     \midrule
-    Accuracy & 0.9927 & 0.9927 \\
-    Macro-F1 & 0.9894 & 0.9894 \\
-    NLL & 0.0310 & \textbf{0.0261} \\
-    Brier & 0.0131 & \textbf{0.0120} \\
-    ECE (15 bins) & 0.0067 & 0.0077 \\
+    Sys One (single forward pass) & \textbf{0.9927} & \textbf{0.9894} & --- & \textbf{29.8\,ms} \\
+    Generative, zero-shot & 0.3473 & 0.3675 & 28.1\% & 495.1\,ms \\
+    Generative, 3-shot & 0.5119 & 0.5233 & 15.2\% & 500.6\,ms \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Table~\ref{tab:main} summarizes the headline: \textbf{99.3\% accuracy, 0.989
-macro-F1} on the held-out test set. Temperature scaling leaves accuracy and
+Table~\ref{tab:main} is the paper in one table: the classifier reaches
+\textbf{99.3\% accuracy} at \textbf{29.8\,ms} per decision, while the matched
+generative baseline---same base model, same 25 tools, same 1,641 queries---manages
+51.2\% (3-shot) at 500.6\,ms. That is a \textbf{$\sim$17$\times$ latency win}
+and a \textbf{+48pp accuracy gain} at once; the usual latency--quality tradeoff
+never appears because the baseline pays for free-text generation twice: in
+milliseconds, and in the 15--28\% of outputs that fail to parse into a valid
+tool call. Temperature scaling leaves accuracy and
 F1 unchanged (it is monotonic in the logits) while improving the proper
 scoring rules that measure uncertainty quality: NLL $0.0310 \to 0.0261$,
 Brier $0.0131 \to 0.0120$. ECE ticks \emph{up} slightly ($0.0067 \to
@@ -344,8 +353,10 @@ fuzzy, the router abstains instead of guessing.
 \end{table}
 
 Per-decision latency is $\sim$30\,ms end to end (Table~\ref{tab:latency}),
-roughly two orders of magnitude faster than an LLM-as-judge tool-selection
-call (typically 2--30\,s), with typed output and no parsing step. Batching
+$\sim$17$\times$ faster than the matched generative baseline on identical
+hardware (Table~\ref{tab:main})---and two orders of magnitude faster than a
+hosted LLM-as-judge call (typically 2--30\,s)---with typed output and no
+parsing step. Batching
 lifts throughput to $\sim$190 decisions/sec on decade-old hardware.
 
 \subsection{Error analysis}

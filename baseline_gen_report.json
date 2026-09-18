@@ -2,7 +2,7 @@
   "n": 1641,
   "accuracy": 0.4831,
   "accuracy_incl_parse_fail_as_wrong": 0.3473,
-  "macro_f1": 0.3534,
+  "macro_f1": 0.3675,
   "latency_ms": {
     "mean": 495.1,
     "p50": 475.3,
@@ -11,5 +11,6 @@
   "parse_failures": 461,
   "parse_failure_rate": 0.2809,
   "confidence_available": false,
-  "throughput_per_sec": 2.0
+  "throughput_per_sec": 2.0,
+  "macro_f1_note": "25-class macro-F1; parse failures counted as false negatives for their true class (no invented 26th class). Corrected from 26-class value 0.3534 via exact rescale x26/25."
 }

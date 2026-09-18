@@ -75,12 +75,20 @@ def main():
     y_pred = np.array(y_pred)
     valid = y_pred >= 0
     acc = float((y_pred[valid] == y_true[valid]).mean()) if valid.sum() else 0.0
-    # macro-F1 over valid predictions only (parse failures count as errors in acc via valid mask; report separately)
-    # for a fair macro-F1, treat parse failures as a wrong class: map -1 to an extra id
-    yp_full = np.where(valid, y_pred, len(TOOLS))
-    yt_full = y_true
-    macro_f1 = float(f1_score(yt_full, yp_full, average="macro",
-                              labels=list(range(len(TOOLS) + 1)), zero_division=0))
+    # macro-F1 over the 25 real classes; parse failures count as errors
+    # (false negatives for their true class) without inventing a 26th class
+    ncls = len(TOOLS)
+    tp = np.zeros(ncls); fp = np.zeros(ncls); fn = np.zeros(ncls)
+    for t, p in zip(y_true, y_pred):
+        if p < 0:
+            fn[t] += 1
+        elif p == t:
+            tp[t] += 1
+        else:
+            fp[p] += 1; fn[t] += 1
+    denom = 2 * tp + fp + fn
+    f1s = np.where(denom > 0, 2 * tp / np.maximum(denom, 1e-12), 0.0)
+    macro_f1 = float(f1s.mean())
     lat = np.array(lat)
     report = {
         "n": len(texts),
