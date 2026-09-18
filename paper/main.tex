@@ -227,8 +227,8 @@ choice of validation data determines whether calibration means anything.
 \subsection{Setup}
 \label{sec:setup}
 
-All experiments run on a single NVIDIA GTX 1080 Ti, except the Glaive-100
-scale run, which was trained and evaluated on a rented RTX 3090 while the
+All experiments run on a single NVIDIA GTX 1080 Ti, except the two Glaive
+scale runs, which were trained and evaluated on rented RTX 3090s while the
 local GPU was unavailable. The base model is Qwen3-0.6B
 in non-thinking mode, frozen, for every experiment---both the classifier and
 the generative baseline. Metrics: accuracy,
@@ -249,13 +249,17 @@ $\le$16 tokens, no confidence output). Parse failures count as wrong (28.1\%
 zero-shot, 15.2\% 3-shot on the curated set). Latency is mean per-example,
 fp16, including tokenization: GTX 1080 Ti for the curated row; the Glaive-100
 row\textsuperscript{$\dagger$} was measured on an RTX 3090 (different
-GPU---compare with care). Macro-F1 is over the classes present
+GPU---compare with care); the Glaive-200 row\textsuperscript{$\ddagger$} was
+measured on another RTX 3090 host whose 2014-era CPU makes single-sample
+latency launch-overhead bound---batch throughput is the informative figure
+(see text). Macro-F1 is over the classes present
 in each split, with parse failures as errors. Datasets without an official
 train/test split are excluded from the leaderboard by design---BFCL is flagged
 for future LoRA/transfer-learning work. Temperature is fit on each setting's
-validation split only ($T=1.7912$ curated, $T=1.4063$ Glaive-100). The
-generative baseline for the Glaive-100 setting is pending (---) and will
-complete the row when run.}
+validation split only ($T=1.7912$ curated, $T=1.4063$ Glaive-100,
+$T=1.3922$ Glaive-200). The
+generative baselines for the Glaive-100 and Glaive-200 settings are pending
+(---) and will complete the rows when run.}
   \label{tab:main}
   \begin{tabular}{lcc@{\hspace{1.2em}}cc@{\hspace{1.2em}}cc}
     \toprule
@@ -265,6 +269,7 @@ complete the row when run.}
     \midrule
     Curated, tool routing ($n{=}1{,}641$) & 0.512 & \textbf{0.993} & 0.523 & \textbf{0.989} & 500.6 & \textbf{29.8} \\
     Glaive-100, tool routing ($n{=}2{,}557$) & --- & \textbf{0.960} & --- & \textbf{0.880} & --- & \textbf{22.2}\textsuperscript{$\dagger$} \\
+    Glaive-200, tool routing ($n{=}2{,}805$) & --- & \textbf{0.939} & --- & \textbf{0.845} & --- & \textbf{55.0}\textsuperscript{$\ddagger$} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -294,6 +299,21 @@ in near-synonym confusions (\texttt{get\_recipe}$\to$\texttt{search\_recipes},
 \texttt{get\_news}$\to$\texttt{get\_news\_articles}). Selective prediction at
 confidence $\ge 0.9$ covers 88.7\% of queries at 99.0\% accuracy, rejecting
 79 of the 101 test errors.
+
+At 179 classes the trend continues. The Glaive-200 setting (178 tools +
+\texttt{no\_tool}, $n=2{,}805$) reaches \textbf{93.9\% accuracy / 0.845
+macro-F1}. The drop again concentrates in the thin tail---\texttt{add\_task},
+\texttt{analyze\_customer\_reviews}, and \texttt{create\_account} all score
+F1 $=0$ on tiny supports---and in near-synonym pairs
+(\texttt{search\_movies}$\to$\texttt{get\_movie\_recommendations},
+\texttt{get\_recipe}$\to$\texttt{search\_recipes},
+\texttt{get\_news\_articles}$\to$\texttt{get\_news}, 6 confusions each).
+Selective prediction at confidence $\ge 0.9$ holds 85.6\% coverage at 98.1\%
+accuracy, rejecting 125 of the 171 test errors. Per-decision latency on the
+rented 3090 host measured 55.0\,ms, but that figure is launch-overhead bound
+by the host's 2014-era CPU and is not comparable across rows; batch
+throughput---257 queries/s at batch 16, 1{,}055/s at batch 64---is the
+informative number.
 
 Datasets without an official train/test split are excluded from the leaderboard
 by design. BFCL \citep{bfcl2024} ships no train/test split, so a frozen
