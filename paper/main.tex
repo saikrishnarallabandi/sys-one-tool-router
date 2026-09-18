@@ -227,7 +227,9 @@ choice of validation data determines whether calibration means anything.
 \subsection{Setup}
 \label{sec:setup}
 
-All experiments run on a single NVIDIA GTX 1080 Ti. The base model is Qwen3-0.6B
+All experiments run on a single NVIDIA GTX 1080 Ti, except the Glaive-100
+scale run, which was trained and evaluated on a rented RTX 3090 while the
+local GPU was unavailable. The base model is Qwen3-0.6B
 in non-thinking mode, frozen, for every experiment---both the classifier and
 the generative baseline. Metrics: accuracy,
 macro-F1, NLL, Brier score \citep{brier1950verification}, and ECE with 15
@@ -244,12 +246,16 @@ row is a setting with a train/test split on which a model was fine-tuned; the
 generative column is the stronger 3-shot baseline using the same frozen
 Qwen3-0.6B in non-thinking mode (plain-text prompts, greedy decoding,
 $\le$16 tokens, no confidence output). Parse failures count as wrong (28.1\%
-zero-shot, 15.2\% 3-shot on the curated set). Latency is mean per-example on one
-GTX 1080 Ti, fp16, including tokenization. Macro-F1 is over the classes present
+zero-shot, 15.2\% 3-shot on the curated set). Latency is mean per-example,
+fp16, including tokenization: GTX 1080 Ti for the curated row; the Glaive-100
+row\textsuperscript{$\dagger$} was measured on an RTX 3090 (different
+GPU---compare with care). Macro-F1 is over the classes present
 in each split, with parse failures as errors. Datasets without an official
 train/test split are excluded from the leaderboard by design---BFCL is flagged
-for future LoRA/transfer-learning work. Temperature $T=1.7912$ is fit on the
-validation split only.}
+for future LoRA/transfer-learning work. Temperature is fit on each setting's
+validation split only ($T=1.7912$ curated, $T=1.4063$ Glaive-100). The
+generative baseline for the Glaive-100 setting is pending (---) and will
+complete the row when run.}
   \label{tab:main}
   \begin{tabular}{lcc@{\hspace{1.2em}}cc@{\hspace{1.2em}}cc}
     \toprule
@@ -258,6 +264,7 @@ validation split only.}
     Dataset + task & Gen. & Sys One & Gen. & Sys One & Gen. & Sys One \\
     \midrule
     Curated, tool routing ($n{=}1{,}641$) & 0.512 & \textbf{0.993} & 0.523 & \textbf{0.989} & 500.6 & \textbf{29.8} \\
+    Glaive-100, tool routing ($n{=}2{,}557$) & --- & \textbf{0.960} & --- & \textbf{0.880} & --- & \textbf{22.2}\textsuperscript{$\dagger$} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -276,6 +283,17 @@ Brier $0.0131 \to 0.0120$. ECE ticks \emph{up} slightly ($0.0067 \to
 0.0077$); with ECE already near zero this is noise, but it is an honest
 reminder that temperature scaling improves likelihood, not necessarily every
 calibration statistic.
+
+Scaling to a larger catalog preserves the picture. On the 101-class
+Glaive-100 setting (100 tools + \texttt{no\_tool}, $n=2{,}557$), the same
+frozen-Qwen3-0.6B classifier reaches \textbf{96.0\% accuracy / 0.880 macro-F1}
+at \textbf{22.2\,ms} per decision. The accuracy drop from the 25-class setting
+concentrates in the thin tail---26 of 101 classes have fewer than 40
+post-deduplication training examples, with test supports as small as 1--3---and
+in near-synonym confusions (\texttt{get\_recipe}$\to$\texttt{search\_recipes},
+\texttt{get\_news}$\to$\texttt{get\_news\_articles}). Selective prediction at
+confidence $\ge 0.9$ covers 88.7\% of queries at 99.0\% accuracy, rejecting
+79 of the 101 test errors.
 
 Datasets without an official train/test split are excluded from the leaderboard
 by design. BFCL \citep{bfcl2024} ships no train/test split, so a frozen
