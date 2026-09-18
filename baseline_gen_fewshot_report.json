@@ -1,0 +1,15 @@
+{
+  "n": 1641,
+  "accuracy": 0.6039,
+  "accuracy_incl_parse_fail_as_wrong": 0.5119,
+  "macro_f1": 0.5032,
+  "latency_ms": {
+    "mean": 500.6,
+    "p50": 479.7,
+    "p99": 674.4
+  },
+  "parse_failures": 250,
+  "parse_failure_rate": 0.1523,
+  "confidence_available": false,
+  "throughput_per_sec": 2.0
+}
