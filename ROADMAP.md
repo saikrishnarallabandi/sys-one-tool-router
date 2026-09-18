@@ -37,3 +37,28 @@ eval-only benchmarks after.
       (typos, paraphrases, new domains).
 - [ ] (10) End-to-end pipeline — router picks tool, generator fills args;
       full task success + dollar/latency savings vs pure LLM-as-judge.
+
+## Benchmark plan: classification vs generation (central thesis)
+
+Routing is a discriminative task (pick one of K known tools); generation pays
+autoregressive cost for a single discrete choice. The benchmark must establish
+this with fair, same-model / same-hardware comparisons.
+
+**Generative baselines — Sai:**
+- Constrained decoding (grammar-restricted to valid tool names): kills the
+  parse-failure strawman; the fair latency fight.
+- Bigger generative models: does scale close the quality gap? (Latency gap
+  only widens; do not dodge the quality question.)
+
+**Sys One runs — Veronica:**
+- [x] Same-model/same-hardware latency+quality vs greedy 0-shot/3-shot (Table 1).
+- [x] Risk-coverage / selective accuracy; BFCL zero-shot transfer + OOD finding.
+- [x] Calibration: ECE15/NLL/Brier before vs after temperature scaling
+      (2026-09-17: ECE15 0.0067 -> 0.0077, NLL 0.0310 -> 0.0261, Brier
+      0.0131 -> 0.0120 — already well-calibrated in-distribution).
+- [ ] Reliability diagram + AUROC of confidence for in-catalog vs
+      out-of-catalog (needs per-item inference pass; queued).
+- [ ] Classifier-side latency breakdown: tokenize vs forward vs argmax
+      (needs healthy GPU; queued).
+- [ ] Catalog-size scaling 25 -> 100+ tools via xLAM/APIGen: does latency
+      stay flat, how does accuracy degrade? (queued after Glaive v2).
