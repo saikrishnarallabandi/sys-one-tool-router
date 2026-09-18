@@ -2,19 +2,25 @@
 
 Experiments to strengthen and stress-test selective tool-call routing.
 Work proceeds one item at a time; each gets a report before moving on.
+Priority (per 2026-09-17): datasets with real training AND eval splits first;
+eval-only benchmarks after.
 
 ## Datasets
 
-- [ ] **(1) BFCL — Berkeley Function-Calling Leaderboard** [IN PROGRESS]
-      Irrelevance split (= our `no_tool` with ground truth) + parallel
-      (multi-label) split. The parallel split tests a limit of the current
-      single-label head.
-- [ ] (2) τ-bench — multi-turn agentic dialogues with user simulator;
-      tests whether routing errors compound across steps.
-- [ ] (3) xLAM / APIGen (Salesforce) — large-scale synthetic data;
-      tests catalog scaling to 100+ tools.
-- [ ] (4) Glaive function-calling v2 — second training distribution;
-      checks results are not a data artifact.
+- [x] **(1) BFCL — Berkeley Function-Calling Leaderboard** [DONE 2026-09-17]
+      Frozen-router zero-shot transfer: 91.3% accuracy on 69 mappable single
+      items, 98.4% selective @0.9. Key limitation found: fixed-catalog
+      classifier cannot express "right tool, not in my catalog" and is
+      overconfident OOD — escalate path needs an explicit out-of-catalog
+      detector, not just the confidence threshold.
+- [ ] **(2) Glaive function-calling v2** [IN PROGRESS] — has train AND test
+      splits. Conservative function mapping + frozen-router baseline on the
+      mapped test subset first; then decide: augment the 25-class head vs
+      train for catalog expansion. Checks results are not a data artifact.
+- [ ] (3) xLAM / APIGen (Salesforce) — large-scale synthetic data with
+      training splits; tests catalog scaling to 100+ tools.
+- [ ] (4) τ-bench — multi-turn agentic dialogues with user simulator
+      (eval-only); tests whether routing errors compound across steps.
 - [ ] (5) Multilingual / code-mixed queries (Hindi/Telugu-English);
       relevant to the Judith audience.
 
