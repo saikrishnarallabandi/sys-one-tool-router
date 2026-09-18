@@ -1,0 +1,259 @@
+{
+  "mapping": {
+    "n_bfcl_functions_mapped": 68,
+    "n_bfcl_functions_total": 716,
+    "mapped_function_counts": {
+      "calculate_bmi": 17,
+      "get_stock_price": 10,
+      "stock_price": 9,
+      "calculate_distance": 8,
+      "geometry.area_triangle": 8,
+      "recipe_search": 7,
+      "find_recipe": 7,
+      "get_shortest_driving_distance": 6,
+      "calculate_BMI": 6,
+      "get_stock_info": 6,
+      "calculate_triangle_area": 5,
+      "geo_distance.calculate": 5,
+      "imdb.find_movies_by_actor": 5,
+      "get_stock_prices": 5,
+      "calculate_shortest_distance": 5,
+      "currency_exchange.convert": 5,
+      "geometry.calculate_area_circle": 4,
+      "calc_area_triangle": 4,
+      "send_email": 4,
+      "movie_details.brief": 4,
+      "library.search_book": 4,
+      "currency_conversion": 4,
+      "calculate_area": 3,
+      "city_distance.find_shortest": 3,
+      "get_news": 3,
+      "sentiment_analysis": 3,
+      "convert_currency": 3,
+      "maps.get_distance_duration": 3,
+      "EuclideanDistance.calculate": 3,
+      "geodistance.find": 3,
+      "recipe.find": 3,
+      "get_stock_data": 3,
+      "calculate_mortgage_payment": 3,
+      "currency_conversion.convert": 2,
+      "latest_exchange_rate": 2,
+      "math.triangle_area_heron": 2,
+      "kinematics.calculate_displacement": 2,
+      "geometry_rectangle.calculate": 2,
+      "avg_closing_price": 2,
+      "library.search_books": 2,
+      "calc_distance": 2,
+      "recipe_search.find": 2,
+      "get_exchange_rate": 2,
+      "translate_text": 2,
+      "stock_market_data": 2,
+      "find_recipes": 1,
+      "get_vegan_recipe": 1,
+      "recipe_finder.find": 1,
+      "get_recipe": 1,
+      "currency_converter": 1,
+      "get_exchange_rate_with_fee": 1,
+      "distance_calculator.calculate": 1,
+      "currency_conversion.get_rate": 1,
+      "rectangle.area": 1,
+      "translate": 1,
+      "area_rectangle.calculate": 1,
+      "area_circle.calculate": 1,
+      "circle.calculate_area": 1,
+      "kinematics.distance_traveled": 1,
+      "text_analysis.sentiment_analysis": 1,
+      "math.triangle_area_base_height": 1,
+      "math.circle_area": 1,
+      "finance.loan_repayment": 1,
+      "geometry_square.calculate": 1,
+      "geometry_circle.calculate": 1,
+      "kinematics.distance": 1,
+      "news": 1,
+      "google.books_search": 1,
+      "openlibrary.books_search": 1
+    },
+    "top_unmapped_functions": [
+      "math.factorial",
+      "math.gcd",
+      "array_sort",
+      "predict_house_price",
+      "calculate_density",
+      "lawsuit_search",
+      "calculate_final_velocity",
+      "calculate_final_speed",
+      "mutation_type.find",
+      "restaurant.find_nearby",
+      "math.hypot",
+      "solve_quadratic",
+      "math.hcf",
+      "calculate_electric_field_strength",
+      "cellbio.get_proteins",
+      "analyze_dna_sequence",
+      "calculate_genotype_frequency",
+      "forest_growth_forecast",
+      "calculate_average",
+      "event_finder.find_upcoming",
+      "geometry.area_circle",
+      "geometry.circumference",
+      "calculus.derivative",
+      "calculate_displacement",
+      "travel_itinerary_generator"
+    ],
+    "n_unmapped_distinct": 647,
+    "note": "Conservative explicit mapping; circumference, routing/directions, weather, booking, and 700+ domain-specific functions left unmapped."
+  },
+  "coverage": {
+    "simple": {
+      "n_total": 400,
+      "n_mappable": 43,
+      "frac": 0.1075
+    },
+    "multiple": {
+      "n_total": 200,
+      "n_mappable": 26,
+      "frac": 0.13
+    },
+    "parallel": {
+      "n_total": 200,
+      "n_mappable": 28,
+      "frac": 0.14
+    },
+    "parallel_multiple": {
+      "n_total": 200,
+      "n_mappable": 4,
+      "frac": 0.02
+    },
+    "irrelevance": {
+      "n_total": 240,
+      "n_mappable": 240,
+      "frac": 1.0
+    }
+  },
+  "results": {
+    "irrelevance": {
+      "n": 240,
+      "no_tool_rate": 0.7125,
+      "conf_mean": 0.7772,
+      "conf_median": 0.9128,
+      "conf_hist": [
+        0,
+        5,
+        11,
+        16,
+        21,
+        17,
+        5,
+        13,
+        25,
+        127
+      ],
+      "top_wrong_preds": {
+        "calculate_distance": 13,
+        "search_movies": 10,
+        "calculate_area": 7,
+        "search_recipes": 6,
+        "calculate_bmi": 4,
+        "search_books": 4,
+        "calculate_loan_payment": 4,
+        "get_news": 4,
+        "calculate_discount": 3,
+        "convert_currency": 2
+      }
+    },
+    "single_gt": {
+      "n": 69,
+      "accuracy": 0.913,
+      "selective_acc_at_0_9": 0.9836,
+      "coverage_at_0_9": 0.8841,
+      "conf_mean": 0.9546,
+      "per_class": {
+        "analyze_sentiment": {
+          "correct": 2,
+          "n": 2,
+          "acc": 1.0
+        },
+        "calculate_area": {
+          "correct": 10,
+          "n": 10,
+          "acc": 1.0
+        },
+        "calculate_bmi": {
+          "correct": 6,
+          "n": 6,
+          "acc": 1.0
+        },
+        "calculate_distance": {
+          "correct": 11,
+          "n": 13,
+          "acc": 0.846
+        },
+        "convert_currency": {
+          "correct": 10,
+          "n": 10,
+          "acc": 1.0
+        },
+        "get_movie_details": {
+          "correct": 0,
+          "n": 1,
+          "acc": 0.0
+        },
+        "get_news": {
+          "correct": 1,
+          "n": 1,
+          "acc": 1.0
+        },
+        "get_stock_price": {
+          "correct": 7,
+          "n": 8,
+          "acc": 0.875
+        },
+        "search_books": {
+          "correct": 2,
+          "n": 2,
+          "acc": 1.0
+        },
+        "search_movies": {
+          "correct": 2,
+          "n": 2,
+          "acc": 1.0
+        },
+        "search_recipes": {
+          "correct": 10,
+          "n": 12,
+          "acc": 0.833
+        },
+        "send_email": {
+          "correct": 1,
+          "n": 1,
+          "acc": 1.0
+        },
+        "translate_text": {
+          "correct": 1,
+          "n": 1,
+          "acc": 1.0
+        }
+      }
+    },
+    "parallel": {
+      "parallel": {
+        "n": 28,
+        "top1_in_gt_set": 0.8571,
+        "any_gt_in_top3": 1.0,
+        "all_gt_in_top3": 1.0
+      },
+      "parallel_multiple": {
+        "n": 4,
+        "top1_in_gt_set": 0.5,
+        "any_gt_in_top3": 1.0,
+        "all_gt_in_top3": 1.0
+      }
+    }
+  },
+  "inference": {
+    "device": "cpu",
+    "temperature": 1.7912421226501465,
+    "threshold": 0.9,
+    "note": "GPU0 unhealthy; CPU fallback"
+  }
+}

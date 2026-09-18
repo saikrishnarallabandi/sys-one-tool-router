@@ -1,0 +1,237 @@
+{
+  "temperature": 1.7912421226501465,
+  "n_test": 1641,
+  "test_before": {
+    "accuracy": 0.9926873857404022,
+    "macro_f1": 0.989376745139431,
+    "nll": 0.03097776435023208,
+    "brier": 0.013097796589136124,
+    "ece15": 0.006730515353204527
+  },
+  "test_after": {
+    "accuracy": 0.9926873857404022,
+    "macro_f1": 0.989376745139431,
+    "nll": 0.026085858226287065,
+    "brier": 0.012027943506836891,
+    "ece15": 0.007743427578738953
+  },
+  "per_class": [
+    {
+      "tool": "calculate_mortgage_payment",
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1": 0.9333,
+      "support": 32
+    },
+    {
+      "tool": "get_movie_details",
+      "precision": 0.931,
+      "recall": 1.0,
+      "f1": 0.9643,
+      "support": 27
+    },
+    {
+      "tool": "translate_text",
+      "precision": 1.0,
+      "recall": 0.9333,
+      "f1": 0.9655,
+      "support": 15
+    },
+    {
+      "tool": "calculate_loan_payment",
+      "precision": 0.9365,
+      "recall": 1.0,
+      "f1": 0.9672,
+      "support": 59
+    },
+    {
+      "tool": "get_definition",
+      "precision": 0.9412,
+      "recall": 1.0,
+      "f1": 0.9697,
+      "support": 16
+    },
+    {
+      "tool": "analyze_sentiment",
+      "precision": 0.9756,
+      "recall": 0.9756,
+      "f1": 0.9756,
+      "support": 41
+    },
+    {
+      "tool": "search_movies",
+      "precision": 0.981,
+      "recall": 0.981,
+      "f1": 0.981,
+      "support": 105
+    },
+    {
+      "tool": "create_todo",
+      "precision": 0.9851,
+      "recall": 1.0,
+      "f1": 0.9925,
+      "support": 66
+    },
+    {
+      "tool": "no_tool",
+      "precision": 0.9967,
+      "recall": 0.9933,
+      "f1": 0.995,
+      "support": 300
+    },
+    {
+      "tool": "search_recipes",
+      "precision": 1.0,
+      "recall": 0.9903,
+      "f1": 0.9951,
+      "support": 103
+    },
+    {
+      "tool": "search_books",
+      "precision": 1.0,
+      "recall": 0.9905,
+      "f1": 0.9952,
+      "support": 105
+    },
+    {
+      "tool": "calculate_age",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 17
+    },
+    {
+      "tool": "calculate_area",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 79
+    },
+    {
+      "tool": "calculate_bmi",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 25
+    },
+    {
+      "tool": "calculate_discount",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 105
+    },
+    {
+      "tool": "calculate_distance",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 32
+    },
+    {
+      "tool": "calculate_tip",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 56
+    },
+    {
+      "tool": "convert_currency",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 43
+    },
+    {
+      "tool": "create_calendar_event",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 105
+    },
+    {
+      "tool": "generate_password",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 52
+    },
+    {
+      "tool": "generate_qr_code",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 21
+    },
+    {
+      "tool": "generate_random_number",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 7
+    },
+    {
+      "tool": "get_news",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 105
+    },
+    {
+      "tool": "get_stock_price",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 33
+    },
+    {
+      "tool": "send_email",
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 92
+    }
+  ],
+  "confusions": [
+    {
+      "true": "calculate_mortgage_payment",
+      "pred": "calculate_loan_payment",
+      "count": 4
+    },
+    {
+      "true": "search_movies",
+      "pred": "get_movie_details",
+      "count": 2
+    },
+    {
+      "true": "translate_text",
+      "pred": "no_tool",
+      "count": 1
+    },
+    {
+      "true": "search_recipes",
+      "pred": "search_movies",
+      "count": 1
+    },
+    {
+      "true": "search_books",
+      "pred": "search_movies",
+      "count": 1
+    },
+    {
+      "true": "no_tool",
+      "pred": "get_definition",
+      "count": 1
+    },
+    {
+      "true": "no_tool",
+      "pred": "analyze_sentiment",
+      "count": 1
+    },
+    {
+      "true": "analyze_sentiment",
+      "pred": "create_todo",
+      "count": 1
+    }
+  ]
+}

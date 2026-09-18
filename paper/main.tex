@@ -466,11 +466,11 @@ The exact label map is \texttt{label\_map.json} in the repository.
 \section{Reproducibility}
 \label{app:repro}
 
-Code, datasets (\texttt{data\_train.jsonl} / \texttt{data\_val.jsonl} /
-\texttt{data\_test.jsonl}), label map, fitted temperature, and the evaluation
+Code, datasets (\texttt{data/data\_train.jsonl} / \texttt{data/data\_val.jsonl} /
+\texttt{data/data\_test.jsonl}), label map, fitted temperature, and the evaluation
 report are in the public repository. \texttt{requirements.txt} pins the
-exact dependency versions. Reference run: \texttt{python make\_data.py}
-$\to$ \texttt{python train.py} ($\sim$20\,min on a GTX 1080 Ti) $\to$
+exact dependency versions. Reference run: \texttt{python scripts/make\_data.py}
+$\to$ \texttt{python scripts/train.py} ($\sim$20\,min on a GTX 1080 Ti) $\to$
 \texttt{python eval.py}. Trained weights ($\sim$2.7\,GB) are not committed;
 \texttt{train.py} reproduces them.
 

@@ -1,0 +1,194 @@
+{
+  "dataset": "glaiveai/glaive-function-calling-v2",
+  "n_items": 112960,
+  "note": "No official train/test split exists on the hub; split here is a hash-based 5% held-out test constructed for this eval. Items with no function spec are plain chit-chat, excluded from routing eval.",
+  "coverage": {
+    "n_mappable": 61345,
+    "n_test_mappable": 3145,
+    "n_train_mappable": 58200,
+    "n_excluded_no_spec": 34598,
+    "n_excluded_unmapped_call": 17017,
+    "mapped_distinct_functions": 46,
+    "unmapped_distinct_functions": 926,
+    "top_unmapped_functions": [
+      "calculate_tax",
+      "search_restaurants",
+      "play_music",
+      "convert_temperature",
+      "generate_random_quote",
+      "create_note",
+      "calculate_shipping_cost",
+      "generate_invoice",
+      "get_random_fact",
+      "create_invoice",
+      "get_random_joke",
+      "search_jobs",
+      "generate_barcode",
+      "check_email_availability",
+      "calculate_interest",
+      "calculate_average",
+      "check_palindrome",
+      "calculate_gpa",
+      "create_user",
+      "generate_random_color"
+    ],
+    "per_class_mappable": {
+      "no_tool": 15144,
+      "generate_password": 3142,
+      "convert_currency": 3117,
+      "calculate_bmi": 3103,
+      "calculate_age": 3014,
+      "calculate_distance": 3010,
+      "calculate_discount": 2955,
+      "calculate_tip": 2929,
+      "search_recipes": 2406,
+      "get_stock_price": 2060,
+      "search_books": 1962,
+      "generate_qr_code": 1929,
+      "calculate_loan_payment": 1724,
+      "generate_random_number": 1717,
+      "get_news": 1514,
+      "send_email": 1494,
+      "create_calendar_event": 1489,
+      "get_movie_details": 1470,
+      "calculate_area": 1430,
+      "search_movies": 1411,
+      "create_todo": 1186,
+      "calculate_mortgage_payment": 1054,
+      "translate_text": 777,
+      "analyze_sentiment": 714,
+      "get_definition": 595
+    }
+  },
+  "results": {
+    "n": 1234,
+    "accuracy": 0.97,
+    "selective_acc_at_0_9": 0.9973,
+    "coverage_at_0_9": 0.8963,
+    "conf_mean": 0.9564,
+    "no_tool": {
+      "n_gt": 579,
+      "recall": 0.9931,
+      "precision": 0.9983,
+      "conf_mean_on_gt": 0.9952
+    },
+    "per_class": {
+      "analyze_sentiment": {
+        "correct": 9,
+        "n": 9,
+        "acc": 1.0
+      },
+      "calculate_area": {
+        "correct": 1,
+        "n": 1,
+        "acc": 1.0
+      },
+      "calculate_discount": {
+        "correct": 62,
+        "n": 63,
+        "acc": 0.984
+      },
+      "calculate_distance": {
+        "correct": 3,
+        "n": 3,
+        "acc": 1.0
+      },
+      "calculate_loan_payment": {
+        "correct": 51,
+        "n": 68,
+        "acc": 0.75
+      },
+      "calculate_mortgage_payment": {
+        "correct": 28,
+        "n": 28,
+        "acc": 1.0
+      },
+      "calculate_tip": {
+        "correct": 5,
+        "n": 5,
+        "acc": 1.0
+      },
+      "convert_currency": {
+        "correct": 1,
+        "n": 1,
+        "acc": 1.0
+      },
+      "create_calendar_event": {
+        "correct": 52,
+        "n": 66,
+        "acc": 0.788
+      },
+      "create_todo": {
+        "correct": 61,
+        "n": 62,
+        "acc": 0.984
+      },
+      "generate_password": {
+        "correct": 78,
+        "n": 78,
+        "acc": 1.0
+      },
+      "generate_qr_code": {
+        "correct": 107,
+        "n": 107,
+        "acc": 1.0
+      },
+      "get_definition": {
+        "correct": 1,
+        "n": 1,
+        "acc": 1.0
+      },
+      "get_movie_details": {
+        "correct": 2,
+        "n": 2,
+        "acc": 1.0
+      },
+      "get_news": {
+        "correct": 7,
+        "n": 7,
+        "acc": 1.0
+      },
+      "get_stock_price": {
+        "correct": 1,
+        "n": 1,
+        "acc": 1.0
+      },
+      "no_tool": {
+        "correct": 575,
+        "n": 579,
+        "acc": 0.993
+      },
+      "search_books": {
+        "correct": 18,
+        "n": 18,
+        "acc": 1.0
+      },
+      "search_movies": {
+        "correct": 51,
+        "n": 51,
+        "acc": 1.0
+      },
+      "search_recipes": {
+        "correct": 17,
+        "n": 17,
+        "acc": 1.0
+      },
+      "send_email": {
+        "correct": 61,
+        "n": 61,
+        "acc": 1.0
+      },
+      "translate_text": {
+        "correct": 6,
+        "n": 6,
+        "acc": 1.0
+      }
+    }
+  },
+  "inference": {
+    "device": "cpu",
+    "temperature": 1.7912421226501465,
+    "threshold": 0.9,
+    "note": "GPU0 unhealthy; CPU fallback. Eval on novel texts only."
+  }
+}

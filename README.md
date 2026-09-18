@@ -102,18 +102,22 @@ representative data, or not at all.
 
 ## Repo contents
 
-| File | What it is |
+| Path | What it is |
 |---|---|
-| `make_data.py` | Downloads Glaive v2, extracts/normalizes/dedups → JSONL datasets |
-| `train.py` | Qwen3-0.6B + LoRA training |
-| `eval.py` | Test metrics, temperature scaling, per-class analysis |
-| `infer.py` | Single-utterance inference → typed JSON |
-| `bench_latency.py` | Latency/throughput benchmark |
-| `data_train.jsonl`, `data_val.jsonl`, `data_test.jsonl` | Exact 70/15/15 datasets from the reference run |
-| `label_map.json` | The 25 class names |
-| `temperature.json` | Fitted temperature (T=1.7912) |
-| `eval_report.json`, `data_stats.json` | Eval artifacts from the reference run |
+| `scripts/` | Pipeline: data build, training, eval, generative baselines, inference, latency bench |
+| `scripts/bfcl/` | BFCL mapping + frozen-transfer eval |
+| `scripts/glaive/` | Glaive v2 audit tools (mapping, novel-text held-out eval) |
+| `scripts/ood/` | OOD challenge generation + eval |
+| `data/` | Curated datasets (`data_train/val/test.jsonl`), label map, stats |
+| `data/bfcl/` | BFCL items + raw dump |
+| `data/glaive/` | Glaive audit items + function counts (raw 259M dump git-ignored) |
+| `exp/` | Run artifacts: eval reports, temperature, baseline reports |
+| `exp/bfcl/`, `exp/glaive/`, `exp/ood/` | Per-experiment reports + predictions |
+| `docs/` | Design notes |
+| `paper/` | Paper source + PDF |
 | `requirements.txt` | Pinned dependencies |
+
+All scripts run from the repo root, e.g. `python scripts/train.py`.
 
 ## Requirements
 
@@ -125,17 +129,18 @@ representative data, or not at all.
 
 ```bash
 pip install -r requirements.txt
-python make_data.py   # build datasets from glaiveai/glaive-function-calling-v2
-python train.py       # train Qwen3-0.6B + LoRA (~20 min on a GTX 1080 Ti)
-python eval.py        # metrics + temperature scaling + per-class analysis
-python infer.py "What is 20% tip on a $85 bill?"
-echo "Send an email to Priya" | python infer.py
-python bench_latency.py
+python scripts/make_data.py   # build datasets from glaiveai/glaive-function-calling-v2
+python scripts/train.py       # train Qwen3-0.6B + LoRA (~20 min on a GTX 1080 Ti)
+python scripts/eval.py        # metrics + temperature scaling + per-class analysis
+python scripts/infer.py "What is 20% tip on a $85 bill?"
+echo "Send an email to Priya" | python scripts/infer.py
+python scripts/bench_latency.py
 ```
 
-`checkpoints/` (trained weights, ~2.7 GB) is git-ignored; run `train.py` to
-reproduce. The committed JSONL/JSON files are the exact datasets, label map,
-and eval artifacts from the reference run described above.
+`exp/checkpoints/` (trained weights, ~2.7 GB) is git-ignored; run
+`scripts/train.py` to reproduce. The committed JSONL/JSON files under `data/`
+and `exp/` are the exact datasets, label map, and eval artifacts from the
+reference run described above.
 
 ## Honest limitations
 

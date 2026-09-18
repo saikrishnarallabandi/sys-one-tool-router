@@ -1,12 +1,12 @@
 *.aux
 *.bbl
 *.blg
-checkpoints/
+exp/checkpoints/
 .DS_Store
 .env
 *.fdb_latexmk
 *.fls
-.ipynb_checkpoints/
+.ipynb_exp/checkpoints/
 *.log
 nohup.out
 *.out
@@ -16,3 +16,5 @@ __pycache__/
 *.toc
 .venv/
 venv
+# 259M Glaive source dump; reproducible via scripts/glaive/build.py
+data/glaive/raw/
