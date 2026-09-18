@@ -235,21 +235,21 @@ bins \citep{naeini2015obtaining}. Latency is measured including tokenization.
 
 \begin{table}[t]
   \centering
-  \caption{Quality vs.\ latency on the test set ($n=1{,}641$, 25 classes).
-  Generative baselines use the same base model (Qwen3-0.6B), plain-text prompts,
-  greedy decoding ($\le$16 tokens), and no confidence output; parse failures
-  count as wrong. Latency is mean per-example on one GTX 1080 Ti, fp16,
-  including tokenization. Macro-F1 is over the 25 real classes with parse
-  failures as errors (no invented 26th class). Temperature $T=1.7912$ is fit
-  on the validation split only.}
+  \small
+  \caption{Quality vs.\ latency by dataset. Generative baselines use the same base
+  model (Qwen3-0.6B), plain-text prompts, greedy decoding ($\le$16 tokens), and no
+  confidence output; parse failures count as wrong (28.1\% zero-shot, 15.2\% 3-shot
+  on the curated set). Latency is mean per-example on one GTX 1080 Ti, fp16,
+  including tokenization. Macro-F1 is over the real classes with parse failures as
+  errors. Temperature $T=1.7912$ is fit on the validation split only.}
   \label{tab:main}
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lccc@{\hspace{1.2em}}ccc@{\hspace{1.2em}}ccc}
     \toprule
-    Method & Accuracy & Macro-F1 & Unparseable & Mean latency \\
+    & \multicolumn{3}{c}{Sys One} & \multicolumn{3}{c}{Generative, 0-shot} & \multicolumn{3}{c}{Generative, 3-shot} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7} \cmidrule(lr){8-10}
+    Dataset & Acc. & F1 & ms & Acc. & F1 & ms & Acc. & F1 & ms \\
     \midrule
-    Sys One (single forward pass) & \textbf{0.9927} & \textbf{0.9894} & --- & \textbf{29.8\,ms} \\
-    Generative, zero-shot & 0.3473 & 0.3675 & 28.1\% & 495.1\,ms \\
-    Generative, 3-shot & 0.5119 & 0.5233 & 15.2\% & 500.6\,ms \\
+    Curated ($n{=}1{,}641$) & \textbf{0.993} & \textbf{0.989} & \textbf{29.8} & 0.347 & 0.368 & 495.1 & 0.512 & 0.523 & 500.6 \\
     \bottomrule
   \end{tabular}
 \end{table}
