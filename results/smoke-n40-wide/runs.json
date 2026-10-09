@@ -1,0 +1,16 @@
+[
+  {
+    "started": "2026-09-24T12:53:08",
+    "argv": [
+      "--models",
+      "laya-english-wide",
+      "--tasks",
+      "banking77,agnews",
+      "--n",
+      "40",
+      "--robustness",
+      "--out",
+      "results/smoke-n40-wide"
+    ]
+  }
+]

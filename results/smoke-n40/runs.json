@@ -1,0 +1,30 @@
+[
+  {
+    "started": "2026-09-24T12:50:32",
+    "argv": [
+      "--models",
+      "laya-english,nli-zeroshot,jev",
+      "--tasks",
+      "all",
+      "--n",
+      "40",
+      "--robustness",
+      "--out",
+      "results/smoke-n40"
+    ]
+  },
+  {
+    "started": "2026-09-24T12:54:04",
+    "argv": [
+      "--models",
+      "laya-english,nli-zeroshot,jev",
+      "--tasks",
+      "all",
+      "--n",
+      "40",
+      "--robustness",
+      "--out",
+      "results/smoke-n40"
+    ]
+  }
+]

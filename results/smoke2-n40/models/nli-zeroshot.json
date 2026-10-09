@@ -1,0 +1,14 @@
+{
+  "name": "nli-zeroshot",
+  "deployment": "local",
+  "device": "mps",
+  "price_per_1m_input_tokens": null,
+  "info": {
+    "model": "MoritzLaurer/deberta-v3-large-zeroshot-v2.0",
+    "max_length": 512
+  },
+  "model_opts": {},
+  "load_time_s": 1.6458950830856338,
+  "loaded_at": "2026-09-24T13:17:30",
+  "first_request_s": 1.248360124998726
+}

@@ -1,0 +1,147 @@
+{
+  "tasks": {
+    "agnews": {
+      "type": "choice",
+      "source": "fancyzhx/ag_news",
+      "split": "test",
+      "n_options": 4,
+      "models": {
+        "laya-english-wide": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.9,
+            "macro_f1": 0.8825396825396825,
+            "top2_accuracy": 1.0,
+            "log_loss": 0.2173198337670304,
+            "brier": 0.11707327152948259,
+            "ece": 0.10785545615752959,
+            "temperature_scaling": {
+              "temperature": 0.6865934251721556,
+              "ece_eval_before": 0.14624425564187105,
+              "ece_eval_after": 0.09268559083749442,
+              "nll_eval_before": 0.24016791523784103,
+              "nll_eval_after": 0.2064607069568956,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.009892136761331808,
+            "coverage_at_95_acc": 0.9
+          },
+          "headline_ci": {
+            "low": 0.8,
+            "high": 0.975,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.0333214788498398,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 132.4718330288306,
+            "p95_ms": 190.93386679887752,
+            "mean_ms": 138.8299628790166,
+            "throughput_rps": 7.203056020921436,
+            "n": 37
+          },
+          "input_tokens_mean": 126.475
+        }
+      }
+    },
+    "banking77": {
+      "type": "choice",
+      "source": "PolyAI/banking77",
+      "split": "test",
+      "n_options": 77,
+      "models": {
+        "laya-english-wide": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.325,
+            "macro_f1": 0.21587301587301586,
+            "top2_accuracy": 0.575,
+            "log_loss": 2.6480788071880057,
+            "brier": 0.8362667301402045,
+            "ece": 0.2866143284702174,
+            "temperature_scaling": {
+              "temperature": 1.56100350766678,
+              "ece_eval_before": 0.274186323572948,
+              "ece_eval_after": 0.15754032039500795,
+              "nll_eval_before": 2.457121179359435,
+              "nll_eval_after": 2.3260569226998222,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.42524524566481825,
+            "coverage_at_95_acc": 0.05
+          },
+          "headline_ci": {
+            "low": 0.2,
+            "high": 0.475,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.7,
+              "mean_tv": 0.5824947904935039,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 195.1117089483887,
+            "p95_ms": 233.30440905410782,
+            "mean_ms": 201.5772680311489,
+            "throughput_rps": 4.960876837786462,
+            "n": 37
+          },
+          "input_tokens_mean": 371.675
+        }
+      }
+    }
+  },
+  "systems": {
+    "laya-english-wide": {
+      "device": "mps",
+      "deployment": "local",
+      "info": {
+        "repo": "convaiinnovations/laya",
+        "subfolder": null,
+        "router": false,
+        "max_len": 512,
+        "head_max_len": 384
+      },
+      "load_time_s": 4.4869850830873474,
+      "first_request_s": 0.8869969999650493,
+      "latency": {
+        "p50_ms": 183.05772892199457,
+        "p95_ms": 225.94648732920177,
+        "mean_ms": 170.20361545508274,
+        "throughput_rps": 5.875315852288127,
+        "n": 74
+      },
+      "n_requests": 80,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 249.075,
+      "usd_per_1k_decisions": 0.0
+    }
+  },
+  "skipped": {}
+}

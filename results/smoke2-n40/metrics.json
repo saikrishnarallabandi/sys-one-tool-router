@@ -1,0 +1,1346 @@
+{
+  "tasks": {
+    "agnews": {
+      "type": "choice",
+      "source": "fancyzhx/ag_news",
+      "split": "test",
+      "n_options": 4,
+      "models": {
+        "laya-english": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.9,
+            "macro_f1": 0.8825396825396825,
+            "top2_accuracy": 1.0,
+            "log_loss": 0.2173198337670304,
+            "brier": 0.11707327152948259,
+            "ece": 0.10785545615752959,
+            "temperature_scaling": {
+              "temperature": 0.6865934251721556,
+              "ece_eval_before": 0.14624425564187105,
+              "ece_eval_after": 0.09268559083749442,
+              "nll_eval_before": 0.24016791523784103,
+              "nll_eval_after": 0.2064607069568956,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.009892136761331808,
+            "coverage_at_95_acc": 0.9
+          },
+          "headline_ci": {
+            "low": 0.8,
+            "high": 0.975,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.0333214788498398,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 41.080249939113855,
+            "p95_ms": 56.40141684561966,
+            "mean_ms": 43.61627252168349,
+            "throughput_rps": 22.92722285020706,
+            "n": 37
+          },
+          "input_tokens_mean": 126.475,
+          "decisions_per_request": 1.0
+        },
+        "laya-serve": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.9,
+            "macro_f1": 0.8825396825396825,
+            "top2_accuracy": 1.0,
+            "log_loss": 0.2173198337670304,
+            "brier": 0.11707327152948259,
+            "ece": 0.10785545615752959,
+            "temperature_scaling": {
+              "temperature": 0.6865934251721556,
+              "ece_eval_before": 0.14624425564187105,
+              "ece_eval_after": 0.09268559083749442,
+              "nll_eval_before": 0.24016791523784103,
+              "nll_eval_after": 0.2064607069568956,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.009892136761331808,
+            "coverage_at_95_acc": 0.9
+          },
+          "headline_ci": {
+            "low": 0.8,
+            "high": 0.975,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.0333214788498398,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 42.33833297621459,
+            "p95_ms": 87.49649978708426,
+            "mean_ms": 52.64098542377453,
+            "throughput_rps": 18.9966048688056,
+            "n": 37
+          },
+          "input_tokens_mean": 126.475,
+          "decisions_per_request": 1.0
+        },
+        "nli-zeroshot": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.875,
+            "macro_f1": 0.8522727272727273,
+            "top2_accuracy": 1.0,
+            "log_loss": 0.5135335746296178,
+            "brier": 0.201181878051649,
+            "ece": 0.09644635944380472,
+            "temperature_scaling": {
+              "temperature": 2.1030947343033373,
+              "ece_eval_before": 0.10415408129964014,
+              "ece_eval_after": 0.11016442510248078,
+              "nll_eval_before": 0.4367368851636645,
+              "nll_eval_after": 0.3871740906039382,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.12129613852626994,
+            "coverage_at_95_acc": 0.775
+          },
+          "headline_ci": {
+            "low": 0.775,
+            "high": 0.975,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 2.6668935403749017e-10,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 51.55000009108335,
+            "p95_ms": 107.21209179610001,
+            "mean_ms": 57.836673398678364,
+            "throughput_rps": 17.290067724103427,
+            "n": 37
+          },
+          "input_tokens_mean": 327.9,
+          "decisions_per_request": 1.0
+        }
+      }
+    },
+    "emotion": {
+      "type": "choice",
+      "source": "dair-ai/emotion",
+      "split": "test",
+      "n_options": 6,
+      "models": {
+        "laya-english": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.575,
+            "macro_f1": 0.46341978583357896,
+            "top2_accuracy": 0.85,
+            "log_loss": 1.41636167088824,
+            "brier": 0.6271596980389145,
+            "ece": 0.2971162804664858,
+            "temperature_scaling": {
+              "temperature": 2.300338116317373,
+              "ece_eval_before": 0.27550387748318167,
+              "ece_eval_after": 0.2349907286397887,
+              "nll_eval_before": 1.410380925347196,
+              "nll_eval_after": 1.1122009010018488,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.23996868638450666,
+            "coverage_at_95_acc": 0.2
+          },
+          "headline_ci": {
+            "low": 0.425,
+            "high": 0.7,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.09825791869627842,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 36.66104201693088,
+            "p95_ms": 40.41160820052028,
+            "mean_ms": 36.382048400244805,
+            "throughput_rps": 27.486082943951867,
+            "n": 37
+          },
+          "input_tokens_mean": 99.425,
+          "decisions_per_request": 1.0
+        },
+        "laya-serve": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.575,
+            "macro_f1": 0.46341978583357896,
+            "top2_accuracy": 0.85,
+            "log_loss": 1.41636167088824,
+            "brier": 0.6271596980389145,
+            "ece": 0.2971162804664858,
+            "temperature_scaling": {
+              "temperature": 2.300338116317373,
+              "ece_eval_before": 0.27550387748318167,
+              "ece_eval_after": 0.2349907286397887,
+              "nll_eval_before": 1.410380925347196,
+              "nll_eval_after": 1.1122009010018488,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.23996868638450666,
+            "coverage_at_95_acc": 0.2
+          },
+          "headline_ci": {
+            "low": 0.425,
+            "high": 0.7,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.09825791869627842,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 37.24933404009789,
+            "p95_ms": 42.40460782311856,
+            "mean_ms": 39.17882318696561,
+            "throughput_rps": 25.523992776094655,
+            "n": 37
+          },
+          "input_tokens_mean": 99.425,
+          "decisions_per_request": 1.0
+        },
+        "nli-zeroshot": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.8,
+            "macro_f1": 0.6999838396897221,
+            "top2_accuracy": 0.95,
+            "log_loss": 0.5286658258613907,
+            "brier": 0.263247901816147,
+            "ece": 0.12780582071855223,
+            "temperature_scaling": {
+              "temperature": 1.139693013525888,
+              "ece_eval_before": 0.1684569407595333,
+              "ece_eval_after": 0.10415547909031139,
+              "nll_eval_before": 0.5326889947209649,
+              "nll_eval_after": 0.5413548943934121,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.045487149430301355,
+            "coverage_at_95_acc": 0.675
+          },
+          "headline_ci": {
+            "low": 0.675,
+            "high": 0.925,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 9.050680925415123e-10,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 42.424833052791655,
+            "p95_ms": 63.24181701056658,
+            "mean_ms": 43.04885029843127,
+            "throughput_rps": 23.229424086069972,
+            "n": 37
+          },
+          "input_tokens_mean": 245.85,
+          "decisions_per_request": 1.0
+        }
+      }
+    },
+    "banking77": {
+      "type": "choice",
+      "source": "PolyAI/banking77",
+      "split": "test",
+      "n_options": 77,
+      "models": {
+        "laya-english": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.3,
+            "macro_f1": 0.22999999999999998,
+            "top2_accuracy": 0.5,
+            "log_loss": 2.698037170345679,
+            "brier": 0.8578661147301527,
+            "ece": 0.2607700204558885,
+            "temperature_scaling": {
+              "temperature": 1.042763129344656,
+              "ece_eval_before": 0.2931629530798097,
+              "ece_eval_after": 0.25592318795185515,
+              "nll_eval_before": 2.7939683033190157,
+              "nll_eval_after": 2.764592932436852,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.4547517901821287,
+            "coverage_at_95_acc": 0.1
+          },
+          "headline_ci": {
+            "low": 0.175,
+            "high": 0.45,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.75,
+              "mean_tv": 0.6208308253818702,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 78.59441603068262,
+            "p95_ms": 90.68152499385178,
+            "mean_ms": 79.97148307166188,
+            "throughput_rps": 12.504457358930146,
+            "n": 37
+          },
+          "input_tokens_mean": 315.675,
+          "decisions_per_request": 1.0
+        },
+        "laya-serve": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.3,
+            "macro_f1": 0.22999999999999998,
+            "top2_accuracy": 0.5,
+            "log_loss": 2.698037170345679,
+            "brier": 0.8578661147301527,
+            "ece": 0.2607700204558885,
+            "temperature_scaling": {
+              "temperature": 1.042763129344656,
+              "ece_eval_before": 0.2931629530798097,
+              "ece_eval_after": 0.25592318795185515,
+              "nll_eval_before": 2.7939683033190157,
+              "nll_eval_after": 2.764592932436852,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.4547517901821287,
+            "coverage_at_95_acc": 0.1
+          },
+          "headline_ci": {
+            "low": 0.175,
+            "high": 0.45,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.75,
+              "mean_tv": 0.6208308253818702,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 79.58045799750835,
+            "p95_ms": 91.99243378825486,
+            "mean_ms": 81.68377463605155,
+            "throughput_rps": 12.242333369822568,
+            "n": 37
+          },
+          "input_tokens_mean": 315.675,
+          "decisions_per_request": 1.0
+        },
+        "nli-zeroshot": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "accuracy",
+          "metrics": {
+            "accuracy": 0.75,
+            "macro_f1": 0.673469387755102,
+            "top2_accuracy": 0.875,
+            "log_loss": 1.4887040834714196,
+            "brier": 0.565758791633766,
+            "ece": 0.3945102295857462,
+            "temperature_scaling": {
+              "temperature": 0.41284479533223145,
+              "ece_eval_before": 0.41703130869734295,
+              "ece_eval_after": 0.24455455323412512,
+              "nll_eval_before": 1.6195700546740703,
+              "nll_eval_after": 1.6718902739135417,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.25575765209546575,
+            "coverage_at_95_acc": 0.025
+          },
+          "headline_ci": {
+            "low": 0.625,
+            "high": 0.875,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 7.12503932692019e-09,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 313.49012500140816,
+            "p95_ms": 642.3534581437705,
+            "mean_ms": 360.09096625462377,
+            "throughput_rps": 2.7770760549790925,
+            "n": 37
+          },
+          "input_tokens_mean": 2530.35,
+          "decisions_per_request": 1.0
+        }
+      }
+    },
+    "sst5": {
+      "type": "score",
+      "source": "SetFit/sst5",
+      "split": "test",
+      "n_options": 5,
+      "models": {
+        "laya-english": {
+          "task_type": "score",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "qwk",
+          "metrics": {
+            "exact_accuracy": 0.275,
+            "within1_accuracy": 0.675,
+            "mae_expected": 1.0331742731405762,
+            "spearman": 0.7903132972024173,
+            "qwk": 0.4215530903328051,
+            "ece": 0.3369093549533602,
+            "log_loss": 2.2016689169479426
+          },
+          "headline_ci": {
+            "low": 0.27699847978664766,
+            "high": 0.553645457591098,
+            "n_resamples": 1000
+          },
+          "latency": {
+            "p50_ms": 27.851207996718585,
+            "p95_ms": 35.31906665302813,
+            "mean_ms": 29.26034910755383,
+            "throughput_rps": 34.17594220507235,
+            "n": 37
+          },
+          "input_tokens_mean": 66.65,
+          "decisions_per_request": 1.0
+        },
+        "laya-serve": {
+          "task_type": "score",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "qwk",
+          "metrics": {
+            "exact_accuracy": 0.275,
+            "within1_accuracy": 0.675,
+            "mae_expected": 1.0331742731405762,
+            "spearman": 0.7903132972024173,
+            "qwk": 0.4215530903328051,
+            "ece": 0.3369093549533602,
+            "log_loss": 2.2016689169479426
+          },
+          "headline_ci": {
+            "low": 0.27699847978664766,
+            "high": 0.553645457591098,
+            "n_resamples": 1000
+          },
+          "latency": {
+            "p50_ms": 29.242665972560644,
+            "p95_ms": 37.42177556268871,
+            "mean_ms": 31.414722982869556,
+            "throughput_rps": 31.832208119272604,
+            "n": 37
+          },
+          "input_tokens_mean": 66.65,
+          "decisions_per_request": 1.0
+        },
+        "nli-zeroshot": {
+          "task_type": "score",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "qwk",
+          "metrics": {
+            "exact_accuracy": 0.575,
+            "within1_accuracy": 0.95,
+            "mae_expected": 0.5211589700125235,
+            "spearman": 0.8410859943428077,
+            "qwk": 0.7573839662447257,
+            "ece": 0.16150342361949352,
+            "log_loss": 1.0643024710125597
+          },
+          "headline_ci": {
+            "low": 0.6325840656547317,
+            "high": 0.8522193469268982,
+            "n_resamples": 1000
+          },
+          "latency": {
+            "p50_ms": 32.86887495778501,
+            "p95_ms": 48.434058413840795,
+            "mean_ms": 34.44450003459949,
+            "throughput_rps": 29.032211209206125,
+            "n": 37
+          },
+          "input_tokens_mean": 191.625,
+          "decisions_per_request": 1.0
+        }
+      }
+    },
+    "sst2": {
+      "type": "noul",
+      "source": "stanfordnlp/sst2",
+      "split": "validation",
+      "n_options": 2,
+      "models": {
+        "laya-english": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "auroc",
+          "metrics": {
+            "auroc": 0.9548872180451128,
+            "auprc": 0.9663883416205398,
+            "accuracy": 0.9,
+            "f1": 0.8888888888888888,
+            "best_f1": 0.9230769230769231,
+            "best_threshold": 0.2144,
+            "brier": 0.09286920424999998,
+            "log_loss": 0.3317649767876129,
+            "ece": 0.1000025,
+            "temperature_scaling": {
+              "temperature": 1.6546400729295394,
+              "ece_eval_before": 0.12529642857142856,
+              "ece_eval_after": 0.1906443769446248,
+              "nll_eval_before": 0.24928699913572167,
+              "nll_eval_after": 0.33922802930163504,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.8671870104949875,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "negation": {
+              "mean_abs_sum_minus_1": 0.41454,
+              "contradiction_rate": 0.4,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 26.287415996193886,
+            "p95_ms": 34.473700355738394,
+            "mean_ms": 27.333355949235123,
+            "throughput_rps": 36.585335582547934,
+            "n": 37
+          },
+          "input_tokens_mean": 56.875,
+          "decisions_per_request": 1.0
+        },
+        "laya-serve": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "auroc",
+          "metrics": {
+            "auroc": 0.9548872180451128,
+            "auprc": 0.9663883416205398,
+            "accuracy": 0.9,
+            "f1": 0.8888888888888888,
+            "best_f1": 0.9230769230769231,
+            "best_threshold": 0.2144,
+            "brier": 0.09286920424999998,
+            "log_loss": 0.3317649767876129,
+            "ece": 0.1000025,
+            "temperature_scaling": {
+              "temperature": 1.6546400729295394,
+              "ece_eval_before": 0.12529642857142856,
+              "ece_eval_after": 0.1906443769446248,
+              "nll_eval_before": 0.24928699913572167,
+              "nll_eval_after": 0.33922802930163504,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.8671870104949875,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "negation": {
+              "mean_abs_sum_minus_1": 0.41454,
+              "contradiction_rate": 0.4,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 28.170375037007034,
+            "p95_ms": 36.365224537439644,
+            "mean_ms": 29.560032564945317,
+            "throughput_rps": 33.829462054987076,
+            "n": 37
+          },
+          "input_tokens_mean": 56.875,
+          "decisions_per_request": 1.0
+        },
+        "nli-zeroshot": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "auroc",
+          "metrics": {
+            "auroc": 1.0,
+            "auprc": 1.0,
+            "accuracy": 0.95,
+            "f1": 0.9444444444444444,
+            "best_f1": 1.0,
+            "best_threshold": 0.05981148034334183,
+            "brier": 0.042437893228305434,
+            "log_loss": 0.1343748834791958,
+            "ece": 0.04356793620281679,
+            "temperature_scaling": {
+              "temperature": 1.7788784009407812,
+              "ece_eval_before": 0.03817554383100023,
+              "ece_eval_after": 0.0634656567677074,
+              "nll_eval_before": 0.08450680066777146,
+              "nll_eval_after": 0.08919810487483301,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.9999999999999999,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "negation": {
+              "mean_abs_sum_minus_1": 0.1027167664225999,
+              "contradiction_rate": 0.1,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 21.17562503553927,
+            "p95_ms": 35.08899980224668,
+            "mean_ms": 24.10756078599071,
+            "throughput_rps": 41.480762358219,
+            "n": 37
+          },
+          "input_tokens_mean": 31.2,
+          "decisions_per_request": 1.0
+        }
+      }
+    },
+    "boolq": {
+      "type": "noul",
+      "source": "google/boolq",
+      "split": "validation",
+      "n_options": 2,
+      "models": {
+        "laya-english": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "auroc",
+          "metrics": {
+            "auroc": 0.765625,
+            "auprc": 0.7549366120697691,
+            "accuracy": 0.775,
+            "f1": 0.8163265306122449,
+            "best_f1": 0.888888888888889,
+            "best_threshold": 0.2339,
+            "brier": 0.17272033375,
+            "log_loss": 0.8034569253090502,
+            "ece": 0.09740750000000002,
+            "temperature_scaling": {
+              "temperature": 0.9244229773868374,
+              "ece_eval_before": 0.11503928571428569,
+              "ece_eval_after": 0.12019227465153215,
+              "nll_eval_before": 1.0009886834874728,
+              "nll_eval_after": 1.00913390051722,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.5786586894586895,
+            "high": 0.9285765160765161,
+            "n_resamples": 1000
+          },
+          "latency": {
+            "p50_ms": 45.90683302376419,
+            "p95_ms": 74.33401690796015,
+            "mean_ms": 49.11404845267031,
+            "throughput_rps": 20.36077316989393,
+            "n": 37
+          },
+          "input_tokens_mean": 160.675,
+          "decisions_per_request": 1.0
+        },
+        "laya-serve": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "auroc",
+          "metrics": {
+            "auroc": 0.765625,
+            "auprc": 0.7549366120697691,
+            "accuracy": 0.775,
+            "f1": 0.8163265306122449,
+            "best_f1": 0.888888888888889,
+            "best_threshold": 0.2339,
+            "brier": 0.17272033375,
+            "log_loss": 0.8034569253090502,
+            "ece": 0.09740750000000002,
+            "temperature_scaling": {
+              "temperature": 0.9244229773868374,
+              "ece_eval_before": 0.11503928571428569,
+              "ece_eval_after": 0.12019227465153215,
+              "nll_eval_before": 1.0009886834874728,
+              "nll_eval_after": 1.00913390051722,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.5786586894586895,
+            "high": 0.9285765160765161,
+            "n_resamples": 1000
+          },
+          "latency": {
+            "p50_ms": 47.22966707777232,
+            "p95_ms": 77.87703343201426,
+            "mean_ms": 51.363425785549786,
+            "throughput_rps": 19.469106367148367,
+            "n": 37
+          },
+          "input_tokens_mean": 160.675,
+          "decisions_per_request": 1.0
+        },
+        "nli-zeroshot": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "auroc",
+          "metrics": {
+            "auroc": 0.9088541666666667,
+            "auprc": 0.9033223977561203,
+            "accuracy": 0.775,
+            "f1": 0.7906976744186046,
+            "best_f1": 0.923076923076923,
+            "best_threshold": 0.015663649886846542,
+            "brier": 0.1794793020716318,
+            "log_loss": 0.6362636388343339,
+            "ece": 0.17496054000657746,
+            "temperature_scaling": {
+              "temperature": 1.6824858675591858,
+              "ece_eval_before": 0.21851515356476225,
+              "ece_eval_after": 0.14026505738024145,
+              "nll_eval_before": 0.7534402097340493,
+              "nll_eval_after": 0.5400035146072557,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.7647042410714286,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "latency": {
+            "p50_ms": 38.13429200090468,
+            "p95_ms": 60.29196700546889,
+            "mean_ms": 39.721502157909846,
+            "throughput_rps": 25.175281539569557,
+            "n": 37
+          },
+          "input_tokens_mean": 133.625,
+          "decisions_per_request": 1.0
+        }
+      }
+    },
+    "typed-decisions": {
+      "type": "multi",
+      "source": "LocalLLaMA/typed-decisions (all)",
+      "split": "test",
+      "n_options": null,
+      "models": {
+        "laya-english": {
+          "task_type": "multi",
+          "n_examples": 400,
+          "n_done": 400,
+          "n_valid": 400,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "decision_accuracy",
+          "metrics": {
+            "decision_accuracy": 0.363,
+            "n_decisions": 2000,
+            "n_cases": 400,
+            "accuracy_by_group": {
+              "agent_trace_observability": 0.388,
+              "customer_service": 0.384,
+              "invoice_processing": 0.362,
+              "security_incidents": 0.318
+            },
+            "choice_accuracy": 0.29,
+            "score_exact_accuracy": 0.32375,
+            "score_mae_expected": 0.9234133431900722,
+            "score_qwk_mean": 0.07749175255592577,
+            "noul_accuracy": 0.48833333333333334,
+            "noul_auroc": 0.44826896360100027,
+            "noul_brier": 0.30362668963333334,
+            "ece": 0.17360798349625184,
+            "kl_from_gold": 0.5695624809277797
+          },
+          "headline_ci": {
+            "low": 0.3379875,
+            "high": 0.3875125,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.3566666666666667,
+              "mean_tv": 0.13150918605399026,
+              "n": 600
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 177.9318119515665,
+            "p95_ms": 265.78788756742136,
+            "mean_ms": 175.39794277458873,
+            "throughput_rps": 5.701321145397595,
+            "n": 394
+          },
+          "input_tokens_mean": 1452.3725,
+          "decisions_per_request": 5.0
+        },
+        "laya-serve": {
+          "task_type": "multi",
+          "n_examples": 400,
+          "n_done": 400,
+          "n_valid": 400,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "decision_accuracy",
+          "metrics": {
+            "decision_accuracy": 0.363,
+            "n_decisions": 2000,
+            "n_cases": 400,
+            "accuracy_by_group": {
+              "agent_trace_observability": 0.388,
+              "customer_service": 0.384,
+              "invoice_processing": 0.362,
+              "security_incidents": 0.318
+            },
+            "choice_accuracy": 0.29,
+            "score_exact_accuracy": 0.32375,
+            "score_mae_expected": 0.9234133431900722,
+            "score_qwk_mean": 0.07749175255592577,
+            "noul_accuracy": 0.48833333333333334,
+            "noul_auroc": 0.44826896360100027,
+            "noul_brier": 0.30362668963333334,
+            "ece": 0.17360798349625184,
+            "kl_from_gold": 0.5695624809277797
+          },
+          "headline_ci": {
+            "low": 0.3379875,
+            "high": 0.3875125,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.3566666666666667,
+              "mean_tv": 0.13150918605399026,
+              "n": 600
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 170.01404199982062,
+            "p95_ms": 282.19336661859404,
+            "mean_ms": 175.78128851662973,
+            "throughput_rps": 5.688887642357881,
+            "n": 394
+          },
+          "input_tokens_mean": 1452.3725,
+          "decisions_per_request": 5.0
+        },
+        "laya-typed-decisions": {
+          "task_type": "multi",
+          "n_examples": 400,
+          "n_done": 400,
+          "n_valid": 400,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "decision_accuracy",
+          "metrics": {
+            "decision_accuracy": 0.767,
+            "n_decisions": 2000,
+            "n_cases": 400,
+            "accuracy_by_group": {
+              "agent_trace_observability": 0.73,
+              "customer_service": 0.766,
+              "invoice_processing": 0.806,
+              "security_incidents": 0.766
+            },
+            "choice_accuracy": 0.7333333333333333,
+            "score_exact_accuracy": 0.72375,
+            "score_mae_expected": 0.4603311080067538,
+            "score_qwk_mean": 0.758546116684339,
+            "noul_accuracy": 0.8583333333333333,
+            "noul_auroc": 0.9365823839955543,
+            "noul_brier": 0.14361051341666667,
+            "ece": 0.21423457342123975,
+            "kl_from_gold": 0.1170494124399728
+          },
+          "headline_ci": {
+            "low": 0.7455,
+            "high": 0.788,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.06833333333333333,
+              "mean_tv": 0.040221170847720034,
+              "n": 600
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 166.94337502121925,
+            "p95_ms": 236.10623357817522,
+            "mean_ms": 161.21034402932773,
+            "throughput_rps": 6.203075900750375,
+            "n": 397
+          },
+          "input_tokens_mean": 1455.925,
+          "decisions_per_request": 5.0
+        },
+        "nli-zeroshot": {
+          "task_type": "multi",
+          "n_examples": 400,
+          "n_done": 400,
+          "n_valid": 400,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "headline": "decision_accuracy",
+          "metrics": {
+            "decision_accuracy": 0.5315,
+            "n_decisions": 2000,
+            "n_cases": 400,
+            "accuracy_by_group": {
+              "agent_trace_observability": 0.44,
+              "customer_service": 0.612,
+              "invoice_processing": 0.53,
+              "security_incidents": 0.544
+            },
+            "choice_accuracy": 0.5416666666666666,
+            "score_exact_accuracy": 0.425,
+            "score_mae_expected": 0.7434583337656645,
+            "score_qwk_mean": 0.275291208129657,
+            "noul_accuracy": 0.6633333333333333,
+            "noul_auroc": 0.7488635732147819,
+            "noul_brier": 0.24229665445937873,
+            "ece": 0.08470578126803911,
+            "kl_from_gold": 0.39828042328263097
+          },
+          "headline_ci": {
+            "low": 0.5115,
+            "high": 0.554,
+            "n_resamples": 1000
+          },
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 2.7959212378855623e-09,
+              "n": 600
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 1533.8783545303158,
+            "p95_ms": 4190.004685847088,
+            "mean_ms": 1717.2938661255666,
+            "throughput_rps": 0.5823115191438535,
+            "n": 394
+          },
+          "input_tokens_mean": 4903.51,
+          "decisions_per_request": 5.0
+        }
+      },
+      "reference": {
+        "prior": 0.4835,
+        "uniform": 0.3175,
+        "prior_by_group": {
+          "agent_trace_observability": 0.362,
+          "customer_service": 0.452,
+          "invoice_processing": 0.518,
+          "security_incidents": 0.602
+        },
+        "n_decisions": 2000
+      }
+    }
+  },
+  "systems": {
+    "laya-english": {
+      "device": "mps",
+      "deployment": "local",
+      "info": {
+        "repo": "convaiinnovations/laya",
+        "subfolder": null,
+        "router": false,
+        "max_len": 512,
+        "head_max_len": 192
+      },
+      "load_time_s": 2.6481587500311434,
+      "first_request_s": 0.23218466597609222,
+      "latency": {
+        "p50_ms": 37.370250502135605,
+        "p95_ms": 80.33876627450809,
+        "mean_ms": 44.2795929171749,
+        "throughput_rps": 22.583766790053886,
+        "n": 222
+      },
+      "latency_multi": {
+        "p50_ms": 177.9318119515665,
+        "p95_ms": 265.78788756742136,
+        "mean_ms": 175.39794277458873,
+        "throughput_rps": 5.701321145397595,
+        "n": 394
+      },
+      "n_requests": 640,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 959.34375,
+      "usd_per_1k_decisions": 0.0,
+      "served_models": []
+    },
+    "laya-serve": {
+      "device": "local server",
+      "deployment": "local",
+      "info": {
+        "model": "english",
+        "base_url": "http://127.0.0.1:8000",
+        "server_launched_by_harness": true,
+        "health": {
+          "status": "ok",
+          "loaded": [
+            "english"
+          ],
+          "device": "auto"
+        }
+      },
+      "load_time_s": 5.14677174994722,
+      "first_request_s": 1.4193680830067024,
+      "latency": {
+        "p50_ms": 38.71916700154543,
+        "p95_ms": 85.55059821228495,
+        "mean_ms": 47.64029409669272,
+        "throughput_rps": 20.990634482028142,
+        "n": 222
+      },
+      "latency_multi": {
+        "p50_ms": 170.01404199982062,
+        "p95_ms": 282.19336661859404,
+        "mean_ms": 175.78128851662973,
+        "throughput_rps": 5.688887642357881,
+        "n": 394
+      },
+      "n_requests": 640,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 959.34375,
+      "usd_per_1k_decisions": 0.0,
+      "served_models": [
+        "laya-rl-agent"
+      ]
+    },
+    "laya-typed-decisions": {
+      "device": "mps",
+      "deployment": "local",
+      "info": {
+        "repo": "convaiinnovations/laya",
+        "subfolder": "typed-decisions",
+        "router": false,
+        "max_len": 1024,
+        "head_max_len": 256
+      },
+      "load_time_s": 37.29448166594375,
+      "first_request_s": 0.12081304099410772,
+      "latency": null,
+      "latency_multi": {
+        "p50_ms": 166.94337502121925,
+        "p95_ms": 236.10623357817522,
+        "mean_ms": 161.21034402932773,
+        "throughput_rps": 6.203075900750375,
+        "n": 397
+      },
+      "n_requests": 400,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 1455.925,
+      "usd_per_1k_decisions": 0.0,
+      "served_models": []
+    },
+    "nli-zeroshot": {
+      "device": "mps",
+      "deployment": "local",
+      "info": {
+        "model": "MoritzLaurer/deberta-v3-large-zeroshot-v2.0",
+        "max_length": 512
+      },
+      "load_time_s": 1.6458950830856338,
+      "first_request_s": 1.248360124998726,
+      "latency": {
+        "p50_ms": 39.81050004949793,
+        "p95_ms": 331.4243901928421,
+        "mean_ms": 93.2083421550389,
+        "throughput_rps": 10.728653432507588,
+        "n": 222
+      },
+      "latency_multi": {
+        "p50_ms": 1533.8783545303158,
+        "p95_ms": 4190.004685847088,
+        "mean_ms": 1717.2938661255666,
+        "throughput_rps": 0.5823115191438535,
+        "n": 394
+      },
+      "n_requests": 640,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 3280.978125,
+      "usd_per_1k_decisions": 0.0,
+      "served_models": []
+    }
+  },
+  "skipped": {
+    "jev": "TYPESAFE_API_KEY is not set; export it to benchmark 'jev-1.13.0'",
+    "kev-0.8b": "kev-0.8b server is not installed (/Users/srallaba/projects/project_decisionmodels/third_party/kev/.venv/bin/python missing); set it up with: (cd third_party/kev && uv sync --extra serve), after cloning https://github.com/jaredpalmer/kev into third_party/kev if it is not there (not `pip install kev`: that PyPI name is an unrelated package)",
+    "kev-4b": "kev-4b server is not installed (/Users/srallaba/projects/project_decisionmodels/third_party/kev/.venv/bin/python missing); set it up with: (cd third_party/kev && uv sync --extra serve), after cloning https://github.com/jaredpalmer/kev into third_party/kev if it is not there (not `pip install kev`: that PyPI name is an unrelated package)",
+    "open-jev-deberta": "com-kotobalabs/open-jev-deberta-v3-large runs Python shipped in its Hub repo (typed_decisions/*.py @ 19bf9a6481); review it, then enable with --model-opts '{\"open-jev-deberta\": {\"allow_hub_code\": true}}'"
+  },
+  "summary": {
+    "models": {
+      "laya-english": {
+        "mean_rank": 2.5,
+        "n_ranked": 7,
+        "heldout_mean_headline": 0.5228880616755835,
+        "n_heldout": 5,
+        "mean_ece_after_ts": 0.17888723180505903,
+        "disclosed": true
+      },
+      "laya-serve": {
+        "mean_rank": 2.5,
+        "n_ranked": 7,
+        "heldout_mean_headline": 0.5228880616755835,
+        "n_heldout": 5,
+        "mean_ece_after_ts": 0.17888723180505903,
+        "disclosed": true
+      },
+      "laya-typed-decisions": {
+        "mean_rank": 1.0,
+        "n_ranked": 1,
+        "heldout_mean_headline": null,
+        "n_heldout": 0,
+        "mean_ece_after_ts": null,
+        "disclosed": true
+      },
+      "nli-zeroshot": {
+        "mean_rank": 1.4285714285714286,
+        "n_ranked": 7,
+        "heldout_mean_headline": 0.7201770833333334,
+        "n_heldout": 2,
+        "mean_ece_after_ts": 0.13252103431497322,
+        "disclosed": true
+      }
+    },
+    "heldout": {
+      "tasks": [
+        "typed-decisions"
+      ],
+      "excluded": {
+        "agnews": [
+          "laya-english",
+          "laya-serve",
+          "nli-zeroshot"
+        ],
+        "emotion": [
+          "nli-zeroshot"
+        ],
+        "banking77": [
+          "nli-zeroshot"
+        ],
+        "sst5": [
+          "nli-zeroshot"
+        ],
+        "sst2": [
+          "nli-zeroshot"
+        ],
+        "boolq": [
+          "laya-english",
+          "laya-serve"
+        ]
+      },
+      "rows": {
+        "laya-english": {
+          "values": {
+            "typed-decisions": 0.363
+          },
+          "mean": 0.363
+        },
+        "laya-serve": {
+          "values": {
+            "typed-decisions": 0.363
+          },
+          "mean": 0.363
+        },
+        "nli-zeroshot": {
+          "values": {
+            "typed-decisions": 0.5315
+          },
+          "mean": 0.5315
+        }
+      },
+      "specialists": [
+        "laya-typed-decisions"
+      ]
+    }
+  }
+}

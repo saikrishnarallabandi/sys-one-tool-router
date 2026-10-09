@@ -1,0 +1,17 @@
+{
+  "name": "laya-typed-decisions",
+  "deployment": "local",
+  "device": "mps",
+  "price_per_1m_input_tokens": null,
+  "info": {
+    "repo": "convaiinnovations/laya",
+    "subfolder": "typed-decisions",
+    "router": false,
+    "max_len": 1024,
+    "head_max_len": 256
+  },
+  "model_opts": {},
+  "load_time_s": 37.29448166594375,
+  "loaded_at": "2026-09-24T13:32:34",
+  "first_request_s": 0.12081304099410772
+}
