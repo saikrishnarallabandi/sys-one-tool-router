@@ -203,3 +203,19 @@ cheap, no retraining. Middle levels (L1/L2) carry most of the error mass.
   inference OK (human_review 0.540, 4.7s cold). Browser rendering unverified (no chromium).
 - Serving required: peft+safetensors installed; v2 adapter base refs → hub id + pin 68c46c4b;
   Qwen3.5-9B-Base snapshot cached locally (~19GB).
+
+## Honest temperatures + fair baselines (2026-10-09, local, from saved rows)
+- Cross-fit T (kev.metrics.out_of_fold_rows, 5-fold group-disjoint, 121-pt grid) on v1 test:
+  4B delta T≈0.41 (0.40–0.43) → ECE 0.162→0.009 [CI 0.009–0.030], Brier 0.276, NLL 0.460, AURC 0.069,
+  cov@0.9 0.374 @ acc 0.974; 9B delta T≈0.45 → ECE 0.149→0.021 [0.013–0.039], Brier 0.310, KL 0.093→0.302.
+  4B train-fit T*=0.35 reproduces: ECE 0.032 (paper previously said 0.031; per-prim .078/.046/.014).
+- Laya typed-decisions specialist is underconfident too (bias −0.214); cross-fit T≈0.33 → ECE 0.018,
+  Brier 0.400→0.318. NLI zero-shot: T≈1.46, ECE 0.081→0.089 (no gain).
+- Released Kev ckpts record logits AFTER their shipped T (kev-4b 2.41, kev-9b 2.30, kev-0.8b 2.35);
+  kev-0.5b/0.6b/8b ship T=1 and are overconfident (+0.11/+0.23/+0.11); kev-8b cross-fit T≈1.7 → ECE 0.051.
+- Paired case bootstrap: 9B−4B delta acc −0.026 [−0.042, −0.010]; 4B delta−kev4b +0.135 [0.113, 0.157];
+  9B delta−kev9b +0.057 [0.035, 0.078].
+- v2-9B on v2-eval is OVERconfident (bias +0.107; choice +0.114, noul +0.145, score +0.035) while
+  underconfident on v1 test (−0.140) → in-domain T<1 must not ship globally. v2 rows/logits not retained.
+- Paper rewritten (9B, v2, related work incl. SearchJev 2610.05107 which pre-empts the recipe);
+  figure: scripts/make_reliability_fig.py → paper/latex/fig_reliability_scale.pdf.
