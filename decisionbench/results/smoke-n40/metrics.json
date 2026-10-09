@@ -1,0 +1,654 @@
+{
+  "tasks": {
+    "agnews": {
+      "type": "choice",
+      "source": "fancyzhx/ag_news",
+      "split": "test",
+      "n_options": 4,
+      "models": {
+        "laya-english": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.9,
+            "macro_f1": 0.8825396825396825,
+            "top2_accuracy": 1.0,
+            "log_loss": 0.2173198337670304,
+            "brier": 0.11707327152948259,
+            "ece": 0.10785545615752959,
+            "temperature_scaling": {
+              "temperature": 0.6865934251721556,
+              "ece_eval_before": 0.14624425564187105,
+              "ece_eval_after": 0.09268559083749442,
+              "nll_eval_before": 0.24016791523784103,
+              "nll_eval_after": 0.2064607069568956,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.009892136761331808,
+            "coverage_at_95_acc": 0.9
+          },
+          "headline_ci": {
+            "low": 0.8,
+            "high": 0.975,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.0333214788498398,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 42.2802910907194,
+            "p95_ms": 116.9733339687807,
+            "mean_ms": 51.94216770296161,
+            "throughput_rps": 19.252180727586047,
+            "n": 37
+          },
+          "input_tokens_mean": 126.475
+        },
+        "nli-zeroshot": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.875,
+            "macro_f1": 0.8522727272727273,
+            "top2_accuracy": 1.0,
+            "log_loss": 0.5135335746296178,
+            "brier": 0.201181878051649,
+            "ece": 0.09644635944380472,
+            "temperature_scaling": {
+              "temperature": 2.1030947343033373,
+              "ece_eval_before": 0.10415408129964014,
+              "ece_eval_after": 0.11016442510248078,
+              "nll_eval_before": 0.4367368851636645,
+              "nll_eval_after": 0.3871740906039382,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.12129613852626994,
+            "coverage_at_95_acc": 0.775
+          },
+          "headline_ci": {
+            "low": 0.775,
+            "high": 0.975,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 2.6668935403749017e-10,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 63.62766702659428,
+            "p95_ms": 391.27184175886197,
+            "mean_ms": 124.67547862576572,
+            "throughput_rps": 8.020823429133703,
+            "n": 37
+          },
+          "input_tokens_mean": 327.9
+        }
+      }
+    },
+    "emotion": {
+      "type": "choice",
+      "source": "dair-ai/emotion",
+      "split": "test",
+      "n_options": 6,
+      "models": {
+        "laya-english": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.575,
+            "macro_f1": 0.46341978583357896,
+            "top2_accuracy": 0.85,
+            "log_loss": 1.41636167088824,
+            "brier": 0.6271596980389145,
+            "ece": 0.2971162804664858,
+            "temperature_scaling": {
+              "temperature": 2.300338116317373,
+              "ece_eval_before": 0.27550387748318167,
+              "ece_eval_after": 0.2349907286397887,
+              "nll_eval_before": 1.410380925347196,
+              "nll_eval_after": 1.1122009010018488,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.23996868638450666,
+            "coverage_at_95_acc": 0.2
+          },
+          "headline_ci": {
+            "low": 0.425,
+            "high": 0.7,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.05,
+              "mean_tv": 0.09825791869627842,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 37.43804106488824,
+            "p95_ms": 41.213433956727386,
+            "mean_ms": 38.26630412840058,
+            "throughput_rps": 26.132651761836012,
+            "n": 37
+          },
+          "input_tokens_mean": 99.425
+        },
+        "nli-zeroshot": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.8,
+            "macro_f1": 0.6999838396897221,
+            "top2_accuracy": 0.95,
+            "log_loss": 0.5286658258613907,
+            "brier": 0.263247901816147,
+            "ece": 0.12780582071855223,
+            "temperature_scaling": {
+              "temperature": 1.139693013525888,
+              "ece_eval_before": 0.1684569407595333,
+              "ece_eval_after": 0.10415547909031139,
+              "nll_eval_before": 0.5326889947209649,
+              "nll_eval_after": 0.5413548943934121,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.045487149430301355,
+            "coverage_at_95_acc": 0.675
+          },
+          "headline_ci": {
+            "low": 0.675,
+            "high": 0.925,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 9.050680925415123e-10,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 38.098374963738024,
+            "p95_ms": 271.9278496457263,
+            "mean_ms": 66.56813177569593,
+            "throughput_rps": 15.022203167268405,
+            "n": 37
+          },
+          "input_tokens_mean": 245.85
+        }
+      }
+    },
+    "banking77": {
+      "type": "choice",
+      "source": "PolyAI/banking77",
+      "split": "test",
+      "n_options": 77,
+      "models": {
+        "laya-english": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.3,
+            "macro_f1": 0.22999999999999998,
+            "top2_accuracy": 0.5,
+            "log_loss": 2.698037170345679,
+            "brier": 0.8578661147301527,
+            "ece": 0.2607700204558885,
+            "temperature_scaling": {
+              "temperature": 1.042763129344656,
+              "ece_eval_before": 0.2931629530798097,
+              "ece_eval_after": 0.25592318795185515,
+              "nll_eval_before": 2.7939683033190157,
+              "nll_eval_after": 2.764592932436852,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.4547517901821287,
+            "coverage_at_95_acc": 0.1
+          },
+          "headline_ci": {
+            "low": 0.175,
+            "high": 0.45,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.75,
+              "mean_tv": 0.6208308253818702,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 77.02191697899252,
+            "p95_ms": 90.96531628165394,
+            "mean_ms": 78.9592646288912,
+            "throughput_rps": 12.664758273775766,
+            "n": 37
+          },
+          "input_tokens_mean": 315.675
+        },
+        "nli-zeroshot": {
+          "task_type": "choice",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "accuracy": 0.75,
+            "macro_f1": 0.673469387755102,
+            "top2_accuracy": 0.875,
+            "log_loss": 1.4887040834714196,
+            "brier": 0.565758791633766,
+            "ece": 0.3945102295857462,
+            "temperature_scaling": {
+              "temperature": 0.41284479533223145,
+              "ece_eval_before": 0.41703130869734295,
+              "ece_eval_after": 0.24455455323412512,
+              "nll_eval_before": 1.6195700546740703,
+              "nll_eval_after": 1.6718902739135417,
+              "n_cal": 12,
+              "n_eval": 28
+            },
+            "aurc": 0.25575765209546575,
+            "coverage_at_95_acc": 0.025
+          },
+          "headline_ci": {
+            "low": 0.625,
+            "high": 0.875,
+            "n_resamples": 1000
+          },
+          "headline": "accuracy",
+          "robustness": {
+            "option_order": {
+              "flip_rate": 0.0,
+              "mean_tv": 7.12503932692019e-09,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 306.9882499985397,
+            "p95_ms": 685.6674667680636,
+            "mean_ms": 357.49267002353696,
+            "throughput_rps": 2.79726015063235,
+            "n": 37
+          },
+          "input_tokens_mean": 2530.35
+        }
+      }
+    },
+    "sst5": {
+      "type": "score",
+      "source": "SetFit/sst5",
+      "split": "test",
+      "n_options": 5,
+      "models": {
+        "laya-english": {
+          "task_type": "score",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "exact_accuracy": 0.275,
+            "within1_accuracy": 0.675,
+            "mae_expected": 1.0331742731405762,
+            "spearman": 0.7903132972024173,
+            "qwk": 0.4215530903328051,
+            "ece": 0.3369093549533602,
+            "log_loss": 2.2016689169479426
+          },
+          "headline_ci": {
+            "low": 0.27699847978664766,
+            "high": 0.553645457591098,
+            "n_resamples": 1000
+          },
+          "headline": "qwk",
+          "latency": {
+            "p50_ms": 30.05162498448044,
+            "p95_ms": 37.69090815912932,
+            "mean_ms": 29.846595660028225,
+            "throughput_rps": 33.50465866829967,
+            "n": 37
+          },
+          "input_tokens_mean": 66.65
+        },
+        "nli-zeroshot": {
+          "task_type": "score",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "exact_accuracy": 0.575,
+            "within1_accuracy": 0.95,
+            "mae_expected": 0.5211589700125235,
+            "spearman": 0.8410859943428077,
+            "qwk": 0.7573839662447257,
+            "ece": 0.16150342361949352,
+            "log_loss": 1.0643024710125597
+          },
+          "headline_ci": {
+            "low": 0.6325840656547317,
+            "high": 0.8522193469268982,
+            "n_resamples": 1000
+          },
+          "headline": "qwk",
+          "latency": {
+            "p50_ms": 33.73987507075071,
+            "p95_ms": 47.4866084055975,
+            "mean_ms": 34.36762273210932,
+            "throughput_rps": 29.097153672654535,
+            "n": 37
+          },
+          "input_tokens_mean": 191.625
+        }
+      }
+    },
+    "sst2": {
+      "type": "noul",
+      "source": "stanfordnlp/sst2",
+      "split": "validation",
+      "n_options": 2,
+      "models": {
+        "laya-english": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "auroc": 0.9548872180451128,
+            "auprc": 0.9663883416205398,
+            "accuracy": 0.9,
+            "f1": 0.8888888888888888,
+            "best_f1": 0.9230769230769231,
+            "best_threshold": 0.2144,
+            "brier": 0.09286920424999998,
+            "log_loss": 0.3317649767876129,
+            "ece": 0.1000025,
+            "temperature_scaling": {
+              "temperature": 1.6546400729295394,
+              "ece_eval_before": 0.12529642857142856,
+              "ece_eval_after": 0.1906443769446248,
+              "nll_eval_before": 0.24928699913572167,
+              "nll_eval_after": 0.33922802930163504,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.8671870104949875,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "headline": "auroc",
+          "robustness": {
+            "negation": {
+              "mean_abs_sum_minus_1": 0.41454,
+              "contradiction_rate": 0.4,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 26.042709010653198,
+            "p95_ms": 52.65302436891915,
+            "mean_ms": 31.62809235131922,
+            "throughput_rps": 31.617461745469125,
+            "n": 37
+          },
+          "input_tokens_mean": 56.875
+        },
+        "nli-zeroshot": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "auroc": 1.0,
+            "auprc": 1.0,
+            "accuracy": 0.95,
+            "f1": 0.9444444444444444,
+            "best_f1": 1.0,
+            "best_threshold": 0.05981148034334183,
+            "brier": 0.042437893228305434,
+            "log_loss": 0.1343748834791958,
+            "ece": 0.04356793620281679,
+            "temperature_scaling": {
+              "temperature": 1.7788784009407812,
+              "ece_eval_before": 0.03817554383100023,
+              "ece_eval_after": 0.0634656567677074,
+              "nll_eval_before": 0.08450680066777146,
+              "nll_eval_after": 0.08919810487483301,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.9999999999999999,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "headline": "auroc",
+          "robustness": {
+            "negation": {
+              "mean_abs_sum_minus_1": 0.1027167664225999,
+              "contradiction_rate": 0.1,
+              "n": 40
+            },
+            "probe_errors": 0
+          },
+          "latency": {
+            "p50_ms": 23.7605000147596,
+            "p95_ms": 289.00162514764804,
+            "mean_ms": 55.94689519509573,
+            "throughput_rps": 17.87409286096826,
+            "n": 37
+          },
+          "input_tokens_mean": 31.2
+        }
+      }
+    },
+    "boolq": {
+      "type": "noul",
+      "source": "google/boolq",
+      "split": "validation",
+      "n_options": 2,
+      "models": {
+        "laya-english": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "auroc": 0.765625,
+            "auprc": 0.7549366120697691,
+            "accuracy": 0.775,
+            "f1": 0.8163265306122449,
+            "best_f1": 0.888888888888889,
+            "best_threshold": 0.2339,
+            "brier": 0.17272033375,
+            "log_loss": 0.8034569253090502,
+            "ece": 0.09740750000000002,
+            "temperature_scaling": {
+              "temperature": 0.9244229773868374,
+              "ece_eval_before": 0.11503928571428569,
+              "ece_eval_after": 0.12019227465153215,
+              "nll_eval_before": 1.0009886834874728,
+              "nll_eval_after": 1.00913390051722,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.5786586894586895,
+            "high": 0.9285765160765161,
+            "n_resamples": 1000
+          },
+          "headline": "auroc",
+          "latency": {
+            "p50_ms": 48.974790959618986,
+            "p95_ms": 79.24704977776852,
+            "mean_ms": 50.97815214429755,
+            "throughput_rps": 19.61624652791305,
+            "n": 37
+          },
+          "input_tokens_mean": 160.675
+        },
+        "nli-zeroshot": {
+          "task_type": "noul",
+          "n_examples": 40,
+          "n_done": 40,
+          "n_valid": 40,
+          "complete": true,
+          "error_rate": 0.0,
+          "errors_sample": [],
+          "metrics": {
+            "auroc": 0.9088541666666667,
+            "auprc": 0.9033223977561203,
+            "accuracy": 0.775,
+            "f1": 0.7906976744186046,
+            "best_f1": 0.923076923076923,
+            "best_threshold": 0.015663649886846542,
+            "brier": 0.1794793020716318,
+            "log_loss": 0.6362636388343339,
+            "ece": 0.17496054000657746,
+            "temperature_scaling": {
+              "temperature": 1.6824858675591858,
+              "ece_eval_before": 0.21851515356476225,
+              "ece_eval_after": 0.14026505738024145,
+              "nll_eval_before": 0.7534402097340493,
+              "nll_eval_after": 0.5400035146072557,
+              "n_cal": 12,
+              "n_eval": 28
+            }
+          },
+          "headline_ci": {
+            "low": 0.7647042410714286,
+            "high": 1.0,
+            "n_resamples": 1000
+          },
+          "headline": "auroc",
+          "latency": {
+            "p50_ms": 41.065333993174136,
+            "p95_ms": 219.7703249054028,
+            "mean_ms": 65.74214748232751,
+            "throughput_rps": 15.21094211698538,
+            "n": 37
+          },
+          "input_tokens_mean": 133.625
+        }
+      }
+    }
+  },
+  "systems": {
+    "laya-english": {
+      "device": "mps",
+      "deployment": "local",
+      "info": {
+        "repo": "convaiinnovations/laya",
+        "subfolder": null,
+        "router": false,
+        "max_len": 512,
+        "head_max_len": 192
+      },
+      "load_time_s": 2.48973145801574,
+      "first_request_s": 0.4434752919478342,
+      "latency": {
+        "p50_ms": 38.11927099013701,
+        "p95_ms": 86.66978540713897,
+        "mean_ms": 46.936762769316395,
+        "throughput_rps": 21.30526139850706,
+        "n": 222
+      },
+      "n_requests": 240,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 137.62916666666666,
+      "usd_per_1k_decisions": 0.0
+    },
+    "nli-zeroshot": {
+      "device": "mps",
+      "deployment": "local",
+      "info": {
+        "model": "MoritzLaurer/deberta-v3-large-zeroshot-v2.0",
+        "max_length": 512
+      },
+      "load_time_s": 45.52120758302044,
+      "first_request_s": 1.4662824170663953,
+      "latency": {
+        "p50_ms": 41.981978982221335,
+        "p95_ms": 384.4934877532068,
+        "mean_ms": 117.46549097242186,
+        "throughput_rps": 8.51313855432466,
+        "n": 222
+      },
+      "n_requests": 240,
+      "error_rate": 0.0,
+      "input_tokens_per_request": 576.7583333333333,
+      "usd_per_1k_decisions": 0.0
+    }
+  },
+  "skipped": {
+    "jev": "TYPESAFE_API_KEY is not set; export it to benchmark Jev"
+  }
+}

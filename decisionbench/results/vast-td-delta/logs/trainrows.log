@@ -1,0 +1,86 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 712.83it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:12,  3.21it/s]Loading weights:  11%|█         | 47/426 [00:00<00:02, 144.49it/s]Loading weights:  17%|█▋        | 73/426 [00:00<00:02, 143.75it/s]Loading weights:  22%|██▏       | 94/426 [00:00<00:02, 124.88it/s]Loading weights:  27%|██▋       | 114/426 [00:00<00:02, 139.70it/s]Loading weights:  31%|███       | 132/426 [00:01<00:02, 125.34it/s]Loading weights:  35%|███▍      | 147/426 [00:01<00:02, 128.70it/s]Loading weights:  38%|███▊      | 162/426 [00:01<00:02, 130.07it/s]Loading weights:  42%|████▏     | 181/426 [00:01<00:01, 144.32it/s]Loading weights:  46%|████▌     | 197/426 [00:01<00:01, 122.58it/s]Loading weights:  50%|████▉     | 211/426 [00:01<00:01, 122.25it/s]Loading weights:  53%|█████▎    | 225/426 [00:01<00:01, 105.14it/s]Loading weights:  56%|█████▌    | 239/426 [00:01<00:01, 112.58it/s]Loading weights:  59%|█████▉    | 252/426 [00:02<00:01, 116.64it/s]Loading weights:  62%|██████▏   | 265/426 [00:02<00:01, 117.20it/s]Loading weights:  66%|██████▋   | 283/426 [00:02<00:01, 133.28it/s]Loading weights:  70%|██████▉   | 297/426 [00:02<00:01, 110.28it/s]Loading weights:  73%|███████▎  | 310/426 [00:02<00:01, 112.36it/s]Loading weights:  77%|███████▋  | 326/426 [00:02<00:00, 122.69it/s]Loading weights:  81%|████████  | 343/426 [00:02<00:00, 110.51it/s]Loading weights:  84%|████████▍ | 358/426 [00:03<00:00, 116.80it/s]Loading weights:  87%|████████▋ | 371/426 [00:03<00:00, 116.61it/s]Loading weights:  90%|█████████ | 384/426 [00:03<00:00, 100.18it/s]Loading weights:  94%|█████████▍| 400/426 [00:03<00:00, 112.17it/s]Loading weights:  97%|█████████▋| 412/426 [00:03<00:00, 111.62it/s]Loading weights: 100%|██████████| 426/426 [00:03<00:00, 118.39it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+evaluated 50/1200
+evaluated 100/1200
+evaluated 150/1200
+evaluated 200/1200
+evaluated 250/1200
+evaluated 300/1200
+evaluated 350/1200
+evaluated 400/1200
+evaluated 450/1200
+evaluated 500/1200
+evaluated 550/1200
+evaluated 600/1200
+evaluated 650/1200
+evaluated 700/1200
+evaluated 750/1200
+evaluated 800/1200
+evaluated 850/1200
+evaluated 900/1200
+evaluated 950/1200
+evaluated 1000/1200
+evaluated 1050/1200
+evaluated 1100/1200
+evaluated 1150/1200
+{
+  "objective": -0.5470464887201204,
+  "clean": {
+    "n": 5790,
+    "nll": 0.5578152058695269,
+    "acc": 0.833678756476684,
+    "ece": 0.19917906932610072,
+    "brier": 0.31136919869953844,
+    "mean_conf": 0.6344996871505832,
+    "confident_error_rate": 0.000690846286701209,
+    "coverage_at_0_9": 0.12918825561312608,
+    "accuracy_at_0_9": 0.9946524064171123,
+    "coverage_at_5pct_error": 0.5414507772020726,
+    "coverage_at_1pct_error": 0.23436960276338514,
+    "aurc": 0.05608274069287164,
+    "error_rate_at_0_9": 0.0053475935828877,
+    "confidence_bias": -0.19917906932610074,
+    "top_bins": {
+      "0.9": {
+        "n": 748,
+        "errors": 4,
+        "error_rate": 0.0053475935828877
+      },
+      "0.95": {
+        "n": 529,
+        "errors": 0,
+        "error_rate": 0.0
+      },
+      "0.99": {
+        "n": 12,
+        "errors": 0,
+        "error_rate": 0.0
+      }
+    },
+    "selective": {
+      "0.5": {
+        "coverage": 0.5,
+        "accuracy": 0.9592400690846287,
+        "confidence_cutoff": 0.5976420418306424
+      },
+      "0.8": {
+        "coverage": 0.8,
+        "accuracy": 0.8924870466321243,
+        "confidence_cutoff": 0.47727387699043494
+      }
+    },
+    "score_mae": 0.37370195545490326,
+    "ranked_probability_score": 0.06431820407225847
+  },
+  "coverage": {
+    "requested_records": 1200,
+    "requested_questions": 6000,
+    "evaluated_records": 1158,
+    "evaluated_questions": 5790,
+    "rejected_records": 42,
+    "truncated_records": 0
+  }
+}

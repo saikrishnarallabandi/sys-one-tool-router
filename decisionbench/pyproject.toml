@@ -1,0 +1,19 @@
+[project]
+name = "decisionbench"
+version = "0.1.0"
+description = "Benchmark harness for System One typed-decision models"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy", "scipy", "scikit-learn", "datasets", "huggingface_hub", "tqdm",
+    "torch", "transformers", "laya", "typesafe-sdk",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools]
+packages = ["decisionbench", "decisionbench.models"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

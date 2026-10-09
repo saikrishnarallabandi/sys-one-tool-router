@@ -1,0 +1,22 @@
+{
+  "name": "laya-serve",
+  "deployment": "local",
+  "device": "local server",
+  "price_per_1m_input_tokens": null,
+  "info": {
+    "model": "english",
+    "base_url": "http://127.0.0.1:8000",
+    "server_launched_by_harness": true,
+    "health": {
+      "status": "ok",
+      "loaded": [
+        "english"
+      ],
+      "device": "auto"
+    }
+  },
+  "model_opts": {},
+  "load_time_s": 5.14677174994722,
+  "loaded_at": "2026-09-24T13:34:59",
+  "first_request_s": 1.4193680830067024
+}

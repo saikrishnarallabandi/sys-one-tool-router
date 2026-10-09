@@ -1,0 +1,6 @@
+{
+  "jev": "TYPESAFE_API_KEY is not set; export it to benchmark 'jev-1.13.0'",
+  "kev-0.8b": "kev-0.8b server is not installed (/Users/srallaba/projects/project_decisionmodels/third_party/kev/.venv/bin/python missing); set it up with: (cd third_party/kev && uv sync --extra serve), after cloning https://github.com/jaredpalmer/kev into third_party/kev if it is not there (not `pip install kev`: that PyPI name is an unrelated package)",
+  "kev-4b": "kev-4b server is not installed (/Users/srallaba/projects/project_decisionmodels/third_party/kev/.venv/bin/python missing); set it up with: (cd third_party/kev && uv sync --extra serve), after cloning https://github.com/jaredpalmer/kev into third_party/kev if it is not there (not `pip install kev`: that PyPI name is an unrelated package)",
+  "open-jev-deberta": "com-kotobalabs/open-jev-deberta-v3-large runs Python shipped in its Hub repo (typed_decisions/*.py @ 19bf9a6481); review it, then enable with --model-opts '{\"open-jev-deberta\": {\"allow_hub_code\": true}}'"
+}

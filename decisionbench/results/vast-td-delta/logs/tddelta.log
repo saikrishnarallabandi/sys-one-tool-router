@@ -1,0 +1,40 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [05:56<05:56, 356.89s/it]Fetching 2 files: 100%|██████████| 2/2 [06:00<00:00, 148.98s/it]Fetching 2 files: 100%|██████████| 2/2 [06:00<00:00, 180.17s/it]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:02<16:20,  2.31s/it]Loading weights:  19%|█▊        | 79/426 [00:02<00:07, 44.27it/s]Loading weights:  25%|██▌       | 108/426 [00:02<00:05, 58.47it/s]Loading weights:  31%|███       | 131/426 [00:03<00:04, 59.76it/s]Loading weights:  35%|███▍      | 147/426 [00:03<00:05, 51.97it/s]Loading weights:  37%|███▋      | 159/426 [00:03<00:04, 57.26it/s]Loading weights:  40%|████      | 171/426 [00:03<00:04, 53.11it/s]Loading weights:  42%|████▏     | 181/426 [00:04<00:04, 52.95it/s]Loading weights:  45%|████▌     | 193/426 [00:04<00:03, 60.46it/s]Loading weights:  47%|████▋     | 202/426 [00:04<00:04, 54.74it/s]Loading weights:  49%|████▉     | 210/426 [00:04<00:03, 55.13it/s]Loading weights:  51%|█████▏    | 219/426 [00:04<00:03, 56.67it/s]Loading weights:  53%|█████▎    | 226/426 [00:04<00:04, 43.91it/s]Loading weights:  55%|█████▌    | 235/426 [00:05<00:04, 44.82it/s]Loading weights:  58%|█████▊    | 248/426 [00:05<00:03, 47.97it/s]Loading weights:  60%|█████▉    | 254/426 [00:05<00:03, 46.44it/s]Loading weights:  62%|██████▏   | 265/426 [00:05<00:03, 46.39it/s]Loading weights:  64%|██████▍   | 273/426 [00:06<00:03, 44.17it/s]Loading weights:  67%|██████▋   | 287/426 [00:06<00:02, 49.70it/s]Loading weights:  71%|███████   | 301/426 [00:06<00:02, 44.60it/s]Loading weights:  75%|███████▍  | 318/426 [00:06<00:01, 57.00it/s]Loading weights:  77%|███████▋  | 326/426 [00:07<00:02, 46.99it/s]Loading weights:  80%|███████▉  | 340/426 [00:07<00:01, 59.50it/s]Loading weights:  82%|████████▏ | 348/426 [00:07<00:01, 53.90it/s]Loading weights:  83%|████████▎ | 355/426 [00:07<00:01, 44.78it/s]Loading weights:  87%|████████▋ | 369/426 [00:07<00:00, 57.44it/s]Loading weights:  88%|████████▊ | 376/426 [00:07<00:00, 52.58it/s]Loading weights:  90%|████████▉ | 383/426 [00:08<00:01, 42.85it/s]Loading weights:  92%|█████████▏| 393/426 [00:08<00:00, 48.66it/s]Loading weights:  94%|█████████▎| 399/426 [00:08<00:00, 33.74it/s]Loading weights:  98%|█████████▊| 417/426 [00:08<00:00, 52.79it/s]Loading weights: 100%|█████████▉| 425/426 [00:09<00:00, 49.11it/s]Loading weights: 100%|██████████| 426/426 [00:09<00:00, 47.10it/s]
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files:   8%|▊         | 1/13 [00:00<00:08,  1.41it/s]Fetching 13 files:  15%|█▌        | 2/13 [00:01<00:09,  1.12it/s]Fetching 13 files:  31%|███       | 4/13 [00:01<00:03,  2.61it/s]Fetching 13 files:  46%|████▌     | 6/13 [00:02<00:02,  3.07it/s]Fetching 13 files:  62%|██████▏   | 8/13 [00:02<00:01,  4.29it/s]Fetching 13 files:  69%|██████▉   | 9/13 [00:02<00:01,  3.80it/s]Fetching 13 files:  77%|███████▋  | 10/13 [00:03<00:00,  3.20it/s]Fetching 13 files:  85%|████████▍ | 11/13 [00:07<00:02,  1.35s/it]Fetching 13 files:  92%|█████████▏| 12/13 [00:07<00:01,  1.04s/it]Fetching 13 files: 100%|██████████| 13/13 [00:12<00:00,  1.97s/it]Fetching 13 files: 100%|██████████| 13/13 [00:12<00:00,  1.05it/s]
+delta: warm start from /root/.cache/huggingface/hub/models--jaredpalmer--kev-4b/snapshots/139fdd94f1b6a6ad80cc15e08fcb99cac885a101: 496 lora tensors and the pointer head loaded
+device=cuda world=1 trainable params=33.8M
+dropped 42 of 1200 records that exceed the training context (384 state / 1024 branch / 2048 packed tokens)
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+1158 training requests (holdout=[]), questions by type {'choice': 1716, 'noul': 1758, 'score': 2316}
+ep0 step 10/290 loss 1.201 kl 0.000 anchor 0.000 2.222s/rec
+ep0 step 20/290 loss 0.962 kl 0.000 anchor 0.000 2.227s/rec
+ep0 step 30/290 loss 0.907 kl 0.000 anchor 0.000 2.202s/rec
+ep0 step 40/290 loss 0.899 kl 0.000 anchor 0.000 2.184s/rec
+ep0 step 50/290 loss 0.822 kl 0.000 anchor 0.000 2.195s/rec
+ep0 step 60/290 loss 0.920 kl 0.000 anchor 0.000 2.166s/rec
+ep0 step 70/290 loss 0.843 kl 0.000 anchor 0.000 2.163s/rec
+ep0 step 80/290 loss 0.823 kl 0.000 anchor 0.000 2.166s/rec
+ep0 step 90/290 loss 0.807 kl 0.000 anchor 0.000 2.188s/rec
+ep0 step 100/290 loss 0.860 kl 0.000 anchor 0.000 2.182s/rec
+ep0 step 110/290 loss 0.834 kl 0.000 anchor 0.000 2.173s/rec
+ep0 step 120/290 loss 0.804 kl 0.000 anchor 0.000 2.176s/rec
+ep0 step 130/290 loss 0.854 kl 0.000 anchor 0.000 2.170s/rec
+ep0 step 140/290 loss 0.855 kl 0.000 anchor 0.000 2.177s/rec
+ep1 step 150/290 loss 0.880 kl 0.000 anchor 0.000 2.182s/rec
+ep1 step 160/290 loss 0.812 kl 0.000 anchor 0.000 2.188s/rec
+ep1 step 170/290 loss 0.808 kl 0.000 anchor 0.000 2.189s/rec
+ep1 step 180/290 loss 0.833 kl 0.000 anchor 0.000 2.193s/rec
+ep1 step 190/290 loss 0.777 kl 0.000 anchor 0.000 2.194s/rec
+ep1 step 200/290 loss 0.817 kl 0.000 anchor 0.000 2.187s/rec
+ep1 step 210/290 loss 0.850 kl 0.000 anchor 0.000 2.178s/rec
+ep1 step 220/290 loss 0.796 kl 0.000 anchor 0.000 2.180s/rec
+ep1 step 230/290 loss 0.799 kl 0.000 anchor 0.000 2.179s/rec
+ep1 step 240/290 loss 0.833 kl 0.000 anchor 0.000 2.181s/rec
+ep1 step 250/290 loss 0.831 kl 0.000 anchor 0.000 2.181s/rec
+ep1 step 260/290 loss 0.829 kl 0.000 anchor 0.000 2.180s/rec
+ep1 step 270/290 loss 0.826 kl 0.000 anchor 0.000 2.178s/rec
+ep1 step 280/290 loss 0.808 kl 0.000 anchor 0.000 2.173s/rec
+ep1 step 290/290 loss 0.784 kl 0.000 anchor 0.000 2.173s/rec
+saved runs/td-delta
