@@ -1,0 +1,125 @@
+\documentclass{article}
+
+\usepackage[preprint]{neurips_2025}
+
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{Post-Training Typed-Decision Models with Proper-Scoring Rewards:\\Accuracy, Calibration, and the Underconfidence Effect}
+\author{Sai Krishna Rallabandi}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Calibrated decisions require probabilities that mean what they say, yet the
+post-training recipes that maximise decision accuracy routinely damage
+calibration, and those that preserve it leave accuracy on the table. We show
+both effects can be had in sequence: post-training a 4B prefill-only
+decision model with soft-target cross-entropy plus Brier and
+ranked-probability-score terms raises held-out decision accuracy 0.665 to
+0.800 and cuts KL from gold threefold, while expected calibration error
+regresses 0.091 to 0.162. A reliability analysis traces the regression to
+systematic \emph{underconfidence} induced by distributional supervision, and
+a single temperature (T*~=~0.35, fit on disjoint training data) restores ECE
+to 0.031 with accuracy unchanged. The result is a small, single-pass model
+that beats an accuracy-first specialist and a calibration-first baseline on
+both axes at once.
+\end{abstract}
+
+\section{Introduction}
+
+Autonomous systems increasingly act on model outputs without a human in the
+loop: routing tickets, triaging incidents, approving invoices. Each such act
+is a \emph{typed decision} — a choice among named options, a score on an
+ordered scale, or a yes/no verdict — reported as a probability distribution.
+The distribution is the product: downstream thresholds (automate, defer,
+escalate) are only meaningful if 0.80 means right 80\% of the time. The
+problem is important because miscalibrated automation either acts when it
+should defer or defers when it could act, and both failures compound at
+machine scale.
+
+The problem is hard because the standard post-training objectives pull in
+opposite directions. Preference-based RL (RLHF) rewards text that
+\emph{sounds} right and narrows output distributions, the wrong objective
+for unattended decisions. Verifiable-reward RL (RLVR) maximises accuracy
+with binary rewards and drives models toward extreme overconfidence; across
+decision benchmarks it wins accuracy while wrecking calibration. The naive
+fix — supervised fine-tuning — calibrates better but gains less accuracy.
+No single-stage recipe in common use delivers both.
+
+It had not been solved in this setting because the two fixes live in
+different stages: proper-scoring rewards shape \emph{distributions} during
+training, while temperature scaling reshapes \emph{confidence} after it, and
+prior work evaluates one or the other rather than composing them on a fixed
+decision benchmark with distributional supervision. Our approach is the
+composition: (i)~post-train a prefill-only decision model with
+cross-entropy against soft teacher-averaged targets plus Brier and RPS
+calibration terms, then (ii)~fit a single temperature on disjoint data.
+On 400 held-out business-decision cases the composed model reaches 0.800
+decision accuracy with ECE 0.031, against 0.665/0.091 for its base, 0.767
+with ECE 0.214 for an accuracy-first specialist, and 0.532 with ECE 0.085
+for a calibration-first baseline.
+
+\begin{itemize}
+\item We show proper-loss post-training on soft decision targets improves
+accuracy, proper scores, and selective prediction together (Section~5).
+\item We identify an \emph{underconfidence effect}: distributional
+supervision spreads mass and depresses argmax confidence below argmax
+accuracy, which ECE punishes symmetrically (Section~6).
+\item We show a single honestly-fit temperature resolves the effect with
+accuracy unchanged, yielding a model that dominates both the
+accuracy-first and calibration-first baselines on both axes (Section~5).
+\end{itemize}
+
+\begin{figure}[t]
+\centering
+\begin{minipage}{0.92\linewidth}\small
+\textbf{Running example (invoice\_processing\_000008, held out).} Invoice
+INV-2026-6038 (\$36,720, Acme Fabrication) against PO-4946; delivery
+accepted with exceptions, received quantity 0. Gold vs.\ model:
+\texttt{discrepancy\_severity} (score): gold $\{3{:}0.83\}$ vs.\ model
+$\{3{:}0.62, 2{:}0.30\}$; \texttt{disposition} (choice): gold
+$\{\text{manual\_review}{:}0.57, \text{hold}{:}0.34\}$ vs.\ model
+$\{\text{manual\_review}{:}0.50, \text{hold}{:}0.43\}$;
+\texttt{duplicate} (noul): gold $\{\text{false}{:}0.96\}$ vs.\ model
+$\{\text{false}{:}0.95\}$; \texttt{matches\_order} (noul): gold
+$\{\text{false}{:}0.92\}$ vs.\ model $\{\text{false}{:}0.89\}$;
+\texttt{urgency} (score): gold $\{2{:}0.50, 1{:}0.37\}$ vs.\ model
+$\{2{:}0.56, 1{:}0.27\}$. All five argmax decisions correct; predicted mass
+tracks gold mass with slightly wider spread — the signature of
+Section~6's underconfidence effect.
+\end{minipage}
+\caption{A real held-out case used throughout: state, gold distributions,
+and measured model outputs. Panels in later sections refer to its
+\texttt{urgency} question (Q5) and \texttt{disposition} question (Q2).}
+\label{fig:running}
+\end{figure}
+
+\section{Background / Related Work}
+
+Two methodological commitments separate this work from its neighbours, and
+everything else is credit. First, \emph{confidence is the output
+distribution, not a second channel.} The RLCR recipe~\cite{damani2025rlcr}
+proves that correctness plus a bounded proper rule incentivises both
+accuracy and calibration, but instantiates confidence as verbalised text
+produced alongside the answer; we instantiate it as the decision
+distribution itself, which is what a single-pass model returns and what
+downstream thresholds consume. We follow RLCR's core theoretical
+constraint — Brier, not log loss, as the calibration term — while
+discarding the verbalisation machinery. Second, \emph{supervision is
+distributional.} Where RLVR-style work rewards discrete hits and
+SFT-style work distills hard labels, we train cross-entropy against
+teacher-averaged soft targets, so the Brier and RPS terms refine an
+already-distributional objective rather than fighting a discretised one.
+The calibration-aware RL diagnosis of~\cite{yaldiz2026calibration} —
+decision tokens inherit overconfidence with no calibrated paths to
+reinforce — motivates our reasoning-free, single-pass architecture, in
+which there are no reasoning traces to inherit from. TypeSafe's
+RLCD program~\cite{typesafe2026rlcd} states the industrial version of our
+objective; it publishes no recipe, curves, or training details, so it is a
+goal statement we operationalise rather than prior art we build on. We
+build directly on the open Kev post-training stack (causal LM, LoRA,
+pointer readout) and evaluate inside a fixed typed-decision harness.

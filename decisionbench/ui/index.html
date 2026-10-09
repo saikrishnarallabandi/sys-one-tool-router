@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Typed Decisions Studio</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+  textarea, input, select { width: 100%; box-sizing: border-box; font-size: 14px; margin: 4px 0 10px; }
+  textarea { font-family: ui-monospace, monospace; }
+  button { font-size: 15px; padding: 8px 18px; cursor: pointer; }
+  .tabs button { margin-right: 6px; }
+  .tabs button.active { font-weight: bold; }
+  .bar { height: 18px; background: #2a7; display: inline-block; vertical-align: middle; }
+  .row { margin: 6px 0; }
+  .prob { font-variant-numeric: tabular-nums; }
+  #status { color: #666; }
+  .opt-grid { display: grid; grid-template-columns: 140px 1fr; gap: 4px 8px; align-items: center; }
+  pre { background: #f4f4f4; padding: 8px; overflow-x: auto; font-size: 12px; }
+</style>
+</head>
+<body>
+<h1>Typed Decisions Studio</h1>
+<p id="status">loading model info…</p>
+
+<h2>Quick ask (plain language)</h2>
+<label>Situation<textarea id="qsit" rows="3" placeholder="What is happening? e.g. The staging deploy is failing with a TLS error, rollback will take 20 minutes."></textarea></label>
+<label>Question<input id="qq" placeholder="e.g. Should I roll back?"></label>
+<div class="tabs" id="qtabs">
+  <button data-t="choice">choice</button>
+  <button data-t="noul" class="active">yes / no</button>
+  <button data-t="score">score 0–4</button>
+</div>
+<div id="qopts" style="display:none"><label>Options, one per line (<code>name: description</code>)<textarea id="qoptlines" rows="3" placeholder="roll back: revert to the last good build&#10;wait: hold 20 minutes and retry&#10;escalate: page the on-call"></textarea></label></div>
+<div id="qlevels" style="display:none"><label>Level descriptions, one per line<textarea id="qlevellines" rows="3" placeholder="Benign&#10;Low&#10;Moderate&#10;High&#10;Critical"></textarea></label></div>
+<button id="qask">Ask</button>
+
+<h2>Or: example / full control</h2>
+<select id="examples"><option value="">— custom input —</option></select>
+
+<h2>2. State (JSON)</h2>
+<textarea id="state" rows="6" placeholder='{"task": "...", ...}'></textarea>
+
+<h2>3. Question</h2>
+<div class="tabs">
+  <button data-t="choice" class="active">choice</button>
+  <button data-t="noul">noul</button>
+  <button data-t="score">score</button>
+</div>
+<label>Question id <input id="qid" value="q1"></label>
+<label>Instructions<textarea id="instructions" rows="2"></textarea></label>
+<div id="opts"></div>
+<button id="addopt">+ option</button>
+
+<h2>4. Ask</h2>
+<button id="ask">Score it</button>
+
+<h2>Answer</h2>
+<div id="answer"></div>
+<h2>What was sent to the model</h2>
+<pre id="sent"></pre>
+<details><summary>raw response</summary><pre id="raw"></pre></details>
+
+<script>
+let qtype = "choice";
+const $ = id => document.getElementById(id);
+
+fetch("examples.json").then(r => r.json()).then(exs => {
+  window._exs = exs;
+  exs.forEach((e, i) => {
+    const o = document.createElement("option");
+    o.value = i;
+    o.textContent = `${e.id} (${e.question.type})`;
+    $("examples").appendChild(o);
+  });
+});
+fetch("/v1/models").then(r => r.json()).then(m => {
+  $("status").textContent = "model: " + (m.data ? m.data.map(x => x.id).join(", ") : JSON.stringify(m));
+}).catch(() => { $("status").textContent = "model: (unreachable?)"; });
+
+function optRow(name, desc) {
+  const d = document.createElement("div");
+  d.className = "opt-grid";
+  d.innerHTML = `<input class="oname" value="${(name||"").replace(/"/g,"&quot;")}" placeholder="name"><input class="odesc" value="${(desc||"").replace(/"/g,"&quot;")}" placeholder="description">`;
+  return d;
+}
+function renderOpts() {
+  const box = $("opts"); box.innerHTML = "";
+  if (qtype === "score") {
+    box.appendChild(Object.assign(document.createElement("p"),
+      {textContent: "One description per level, in order (L0, L1, …). Name column ignored."}));
+  }
+  const n = box.dataset.n || (qtype === "noul" ? 2 : 3);
+  for (let i = 0; i < n; i++) box.appendChild(optRow(qtype === "noul" ? ["false","true"][i] : "", ""));
+  box.dataset.n = n;
+}
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.classList.remove("active"));
+  b.classList.add("active"); qtype = b.dataset.t;
+  delete $("opts").dataset.n; renderOpts();
+});
+$("addopt").onclick = () => { $("opts").appendChild(optRow("", "")); };
+$("examples").onchange = e => {
+  if (e.target.value === "") return;
+  const ex = window._exs[+e.target.value];
+  $("state").value = JSON.stringify(ex.state, null, 1);
+  $("qid").value = ex.question_id;
+  document.querySelector(`.tabs button[data-t="${ex.question.type}"]`).click();
+  const box = $("opts"); box.innerHTML = "";
+  const q = ex.question;
+  if (q.type === "choice") Object.entries(q.criteria).forEach(([k,v]) => box.appendChild(optRow(k, v)));
+  else if (q.type === "noul") { box.appendChild(optRow("false", q.criteria?.false || "")); box.appendChild(optRow("true", q.criteria?.true || "")); }
+  else q.criteria.forEach(c => box.appendChild(optRow("", c)));
+  $("answer").innerHTML = ""; $("raw").textContent = "";
+};
+let qqtype = "noul";
+document.querySelectorAll("#qtabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("#qtabs button").forEach(x => x.classList.remove("active"));
+  b.classList.add("active"); qqtype = b.dataset.t;
+  $("qopts").style.display = qqtype === "choice" ? "" : "none";
+  $("qlevels").style.display = qqtype === "score" ? "" : "none";
+});
+$("qask").onclick = async () => {
+  const sit = $("qsit").value.trim(), qq = $("qq").value.trim() || "What should be done?";
+  if (!sit) { alert("Describe the situation first"); return; }
+  let q;
+  if (qqtype === "choice") {
+    const criteria = {};
+    $("qoptlines").value.split("\n").map(s => s.trim()).filter(Boolean).forEach(line => {
+      const i = line.indexOf(":");
+      if (i > 0) criteria[line.slice(0, i).trim()] = line.slice(i + 1).trim();
+      else criteria[line] = line;
+    });
+    if (Object.keys(criteria).length < 2) { alert("Give at least two options"); return; }
+    q = {type: "choice", instructions: qq, criteria};
+  } else if (qqtype === "score") {
+    const criteria = $("qlevellines").value.split("\n").map(s => s.trim()).filter(Boolean);
+    if (criteria.length < 2) { alert("Give at least two levels"); return; }
+    q = {type: "score", instructions: qq, criteria};
+  } else {
+    q = {type: "noul", instructions: qq, criteria: {false: "No.", true: "Yes."}};
+  }
+  await scoreIt({note: sit}, "q", q);
+};
+async function scoreIt(state, qid, q) {
+  $("answer").textContent = "scoring…";
+  $("sent").textContent = JSON.stringify({state, questions: {[qid]: q}}, null, 1);
+  const res = await fetch("/v1/systemone", {method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({state, questions: {[qid]: q}})});
+  const body = await res.json();
+  $("raw").textContent = JSON.stringify(body, null, 1);
+  const a = (body.answers || {})[qid] || {};
+  let probs = a.probabilities || {}, label = a.choice ?? a.answer;
+  if (a.type === "noul" && typeof a.noul === "number") {
+    probs = {No: 1 - a.noul, Yes: a.noul};
+    label = a.noul >= 0.5 ? "Yes" : "No";
+    a.confidence = Math.max(a.noul, 1 - a.noul);
+  }
+  if (a.type === "score" && typeof a.score === "number") {
+    const top = Object.entries(probs).sort((x,y)=>y[1]-x[1])[0];
+    label = `L${top ? top[0] : "?"} (expected ${a.score.toFixed(2)})`;
+    if (a.legend) probs = Object.fromEntries(Object.entries(probs).map(([k,v]) => [`L${k}: ${a.legend[k]}`, v]));
+  }
+  if (label === undefined) label = Object.entries(probs).sort((x,y)=>y[1]-x[1])[0]?.[0] ?? "?";
+  let html = `<p><b>answer: ${label}</b> &nbsp; confidence: ${(a.confidence ?? 0).toFixed(3)}</p>`;
+  const mx = Math.max(0.001, ...Object.values(probs));
+  for (const [k, v] of Object.entries(probs))
+    html += `<div class="row"><b>${k}</b> <span class="bar" style="width:${(v/mx*280)|0}px"></span> <span class="prob">${(+v).toFixed(3)}</span></div>`;
+  $("answer").innerHTML = html;
+}
+$("ask").onclick = async () => {
+  let state;
+  try { state = JSON.parse($("state").value); }
+  catch { alert("State is not valid JSON"); return; }
+  const names = [...document.querySelectorAll(".oname")].map(x => x.value.trim());
+  const descs = [...document.querySelectorAll(".odesc")].map(x => x.value);
+  let q;
+  if (qtype === "choice") {
+    const criteria = {};
+    names.forEach((n, i) => { if (n) criteria[n] = descs[i]; });
+    q = {type: "choice", instructions: $("instructions").value, criteria};
+  } else if (qtype === "noul") {
+    q = {type: "noul", instructions: $("instructions").value,
+         criteria: {false: descs[0] || "", true: descs[1] || ""}};
+  } else {
+    q = {type: "score", instructions: $("instructions").value, criteria: descs.filter(d => d)};
+  }
+  await scoreIt(state, $("qid").value || "q1", q);
+};
+renderOpts();
+</script>
+</body>
+</html>

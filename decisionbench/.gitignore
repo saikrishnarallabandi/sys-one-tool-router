@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+
+# Local caches: downloaded/converted datasets and server logs (regenerate with scripts/)
+.cache/
+
+# LoRA / model artifacts (weights, heads, tokenizers). Each run's README, training config,
+# training metrics and eval reports are kept.
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.gguf
+adapter_config.json
+tokenizer.json
+tokenizer_config.json
+chat_template.jinja
+
+# Third-party clones (pinned commits in third_party/README.md)
+third_party/*/
+!third_party/README.md
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+# keep training/eval logs
+!results/**/logs/*.log
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Secrets
+.env
+.env.*
+*.pem

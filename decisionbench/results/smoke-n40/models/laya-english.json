@@ -1,0 +1,17 @@
+{
+  "name": "laya-english",
+  "deployment": "local",
+  "device": "mps",
+  "price_per_1m_input_tokens": null,
+  "info": {
+    "repo": "convaiinnovations/laya",
+    "subfolder": null,
+    "router": false,
+    "max_len": 512,
+    "head_max_len": 192
+  },
+  "model_opts": {},
+  "load_time_s": 2.48973145801574,
+  "loaded_at": "2026-09-24T12:50:41",
+  "first_request_s": 0.4434752919478342
+}

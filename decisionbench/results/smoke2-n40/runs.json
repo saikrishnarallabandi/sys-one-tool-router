@@ -1,0 +1,40 @@
+[
+  {
+    "started": "2026-09-24T13:11:33",
+    "argv": [
+      "--models",
+      "laya-english,nli-zeroshot,laya-serve,jev,kev-0.8b,kev-4b,open-jev-deberta",
+      "--tasks",
+      "all",
+      "--n",
+      "40",
+      "--robustness",
+      "--out",
+      "results/smoke2-n40"
+    ]
+  },
+  {
+    "started": "2026-09-24T13:15:34",
+    "argv": [
+      "--models",
+      "laya-english,nli-zeroshot,laya-typed-decisions",
+      "--tasks",
+      "typed-decisions",
+      "--robustness",
+      "--out",
+      "results/smoke2-n40"
+    ]
+  },
+  {
+    "started": "2026-09-24T13:34:54",
+    "argv": [
+      "--models",
+      "laya-serve,jev,kev-0.8b,kev-4b,open-jev-deberta",
+      "--tasks",
+      "typed-decisions",
+      "--robustness",
+      "--out",
+      "results/smoke2-n40"
+    ]
+  }
+]
